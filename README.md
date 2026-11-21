@@ -1,4 +1,4 @@
-# ALPHA-Q website
+# AQx website
 
 Premium graphite-and-gold one-page website with custom artwork, the v4.1.2 loader, a feature gallery, a custom key-binding demo and Discord delivery.
 
@@ -34,8 +34,8 @@ Prices live in `dist/index.html`; `dist/app.js` updates the selected purchase la
 
 ## Assets
 
-Custom artwork uses black and champagne gold: a precision sculpture, macro keycaps and the ALPHA-Q emblem rising behind obsidian mountains. Built-in imagegen prompts are recorded in `art-direction.json`. All artwork and fonts are self-hosted; font licenses are included.
+Custom artwork uses black and champagne gold: a precision sculpture, macro keycaps and the AQx emblem rising behind obsidian mountains. Built-in imagegen prompts are recorded in `art-direction.json`. All artwork and fonts are self-hosted; font licenses are included.
 
-The v4.1.2 loader image is an actual rendered interface preview. The Gameplay tab uses a user-supplied in-game DMZ screenshot. Other UI images are project-rendered layouts. The page makes no measured latency, hit-rate, detection or market-ranking claims.
+The v4.1.2 loader image is a rendered interface preview with updated AQx branding. The Gameplay tab uses a user-supplied in-game DMZ screenshot with updated branding. Other UI images are project-rendered layouts. The page makes no measured latency, hit-rate, detection or market-ranking claims.
 
 This repository contains website source and public assets only. Application binaries, license keys and backend credentials are excluded.

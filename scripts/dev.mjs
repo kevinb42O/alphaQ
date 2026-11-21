@@ -28,6 +28,6 @@ const server=http.createServer(async(req,res)=>{
 let timer;
 const watcher=preview?null:watch(root,{recursive:true},()=>{clearTimeout(timer);timer=setTimeout(()=>{for(const client of clients)client.write('data: reload\n\n');},100);});
 server.on('error',error=>{console.error(error.code==='EADDRINUSE'?`Port ${port} is in use. Try npm run dev -- --port ${port+1}`:error.message);process.exitCode=1;watcher?.close();});
-server.listen(port,host,()=>console.log(`\n  ALPHA-Q website\n  Local: http://${host}:${port}/\n  ${preview?'Preview mode':'Auto-refresh enabled. Edit files in dist/.'}\n`));
+server.listen(port,host,()=>console.log(`\n  AQx website\n  Local: http://${host}:${port}/\n  ${preview?'Preview mode':'Auto-refresh enabled. Edit files in dist/.'}\n`));
 function shutdown(){watcher?.close();for(const client of clients)client.end();server.close();}
 process.on('SIGINT',shutdown);process.on('SIGTERM',shutdown);
