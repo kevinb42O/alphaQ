@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {normalize,sha,generateKey,session,validSession,equal} from '../lib/licensing.mjs';
+test('random keys normalize, malformed keys are rejected',()=>{const keys=new Set();for(let i=0;i<1000;i++){const k=generateKey();assert.equal(normalize(k).length,36);assert.equal(normalize(k.toLowerCase()),normalize(k));keys.add(k);}assert.equal(keys.size,1000);assert.equal(normalize('ALQ1-0000'),null);assert.equal(normalize(null),null);assert.equal(sha('x').length,64);});
+test('admin sessions verify signature and expiry',()=>{const secret='x'.repeat(64),t=session(secret,100000);assert(validSession(t,secret,101000));assert(!validSession(t,'y'.repeat(64),101000));assert(!validSession(t,secret,3701000));assert(!validSession(t+'.extra',secret,101000));assert(!validSession('invalid',secret));assert(equal('a','a'));assert(!equal('a','b'));});
