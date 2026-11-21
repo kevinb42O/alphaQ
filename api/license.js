@@ -1,4 +1,4 @@
-import {sha,normalize,generateKey,equal,session,validSession,database,rate} from '../lib/licensing.mjs';
+import {sha,normalize,generateKey,equal,session,validSession,database,rate,verifyPassword} from '../lib/licensing.mjs';
 const ORIGIN='https://aqxmenu.vercel.app';
 export default async function handler(req,res){
  res.setHeader('Cache-Control','no-store, private');res.setHeader('X-Content-Type-Options','nosniff');
@@ -19,14 +19,19 @@ export default async function handler(req,res){
   const origin=req.headers.origin;const expected=process.env.APP_ORIGIN||ORIGIN;
   if(origin!==expected||!(req.headers['content-type']||'').startsWith('application/json'))return send(403,{ok:false,message:'Admin requests require the site origin.'});
   const secret=process.env.AQX_ADMIN_SECRET;if(!secret||secret.length<40)throw new Error('Admin not configured');
+  const adminEmail=process.env.AQX_ADMIN_EMAIL?.trim().toLowerCase(),passwordHash=process.env.AQX_ADMIN_PASSWORD_HASH;
+  if(!adminEmail||!passwordHash)throw new Error('Email/password login not configured');
+  const sessionSecret=sha(secret+'|'+adminEmail+'|'+passwordHash);
   if(action==='login'){
    if(!await rate('login:'+sha(ip),8,900))return send(429,{ok:false,message:'Too many login attempts. Wait 15 minutes.'});
-   if(!equal(body.secret||'',secret))return send(401,{ok:false,message:'Invalid administrator credential.'});
-   res.setHeader('Set-Cookie',`__Host-aqx_admin=${session(secret)}; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=3600`);return send(200,{ok:true});
+   const emailOk=typeof body.email==='string'&&equal(body.email.trim().toLowerCase(),adminEmail);
+   const passwordOk=await verifyPassword(body.password,passwordHash);
+   if(!emailOk||!passwordOk)return send(401,{ok:false,message:'Email or password is incorrect.'});
+   res.setHeader('Set-Cookie',`__Host-aqx_admin=${session(sessionSecret)}; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=3600`);return send(200,{ok:true});
   }
   if(action==='logout'){res.setHeader('Set-Cookie','__Host-aqx_admin=; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=0');return send(200,{ok:true});}
   const token=(req.headers.cookie||'').split(';').map(s=>s.trim()).find(s=>s.startsWith('__Host-aqx_admin='))?.slice('__Host-aqx_admin='.length);
-  if(!token||!validSession(token,secret))return send(401,{ok:false,message:'Sign in to manage licenses.'});
+  if(!token||!validSession(token,sessionSecret))return send(401,{ok:false,message:'Sign in to manage licenses.'});
   if(action==='list'){
    const licenses=await database('aqx_licenses?select=id,label,duration_days,created_at,activated_at,expires_at,device_hash,revoked,last_seen_at,reset_count&order=created_at.desc&limit=1000',{method:'GET'});
    const audit=await database('aqx_audit?select=id,created_at,license_id,action&order=id.desc&limit=50',{method:'GET'});return send(200,{ok:true,licenses,audit});
