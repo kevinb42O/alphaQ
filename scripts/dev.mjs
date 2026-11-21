@@ -16,10 +16,10 @@ const server=http.createServer(async(req,res)=>{
   let pathname;
   try{pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);}catch{res.writeHead(400).end('Bad request');return;}
   if(pathname==='/__dev_events'&&!preview){res.writeHead(200,{'Content-Type':'text/event-stream','Cache-Control':'no-cache','Connection':'keep-alive'});res.write(': connected\n\n');clients.add(res);req.on('close',()=>clients.delete(res));return;}
-  const file=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));
+  let file=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));
   if(file!==root&&!file.startsWith(root+path.sep)){res.writeHead(403).end('Forbidden');return;}
   try{
-    const info=await stat(file);if(!info.isFile())throw new Error('Not a file');
+    let info=await stat(file);if(info.isDirectory()){file=path.join(file,'index.html');info=await stat(file);}if(!info.isFile())throw new Error('Not a file');
     let bytes=await readFile(file);
     if(!preview&&path.extname(file)==='.html')bytes=Buffer.from(bytes.toString().replace('</body>',`<script>new EventSource('/__dev_events').onmessage=()=>location.reload();</script></body>`));
     res.writeHead(200,{'Content-Type':types[path.extname(file)]||'application/octet-stream','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(req.method==='HEAD'?undefined:bytes);
