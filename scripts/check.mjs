@@ -7,7 +7,7 @@ const html=await readFile(path.join(dist,'index.html'),'utf8');
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
 assert.equal(ids.length,new Set(ids).size,'Duplicate HTML IDs');
 const refs=[...html.matchAll(/(?:src|href)="([^"]+)"/g)].map(m=>m[1]);
-for(const ref of refs){if(ref.startsWith('#')){assert(ref==='#'||ids.includes(ref.slice(1)),`Missing section: ${ref}`);}else if(!ref.startsWith('http'))await access(path.join(dist,ref));}
+for(const ref of refs){if(ref.startsWith('#')){assert(ref==='#'||ids.includes(ref.slice(1)),`Missing section: ${ref}`);}else if(!ref.startsWith('http')&&!ref.startsWith('/_vercel/'))await access(path.join(dist,ref));}
 const discord=refs.filter(r=>r.includes('discord.gg/'));
 assert(discord.length>=3&&discord.every(r=>r==='https://discord.gg/VzHWpB7uG'),'Discord invite mismatch');
 for(const [days,price]of [['1','5'],['3','7.50'],['30','10']])assert(html.includes(`data-days="${days}" data-price="${price}"`),'Pricing mismatch');
