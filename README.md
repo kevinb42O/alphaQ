@@ -24,7 +24,7 @@ npm run preview
 
 ## Vercel
 
-Import the repository with its root as Root Directory. Framework: Other. Build command: `npm run build`. Output directory: `dist`. The included `vercel.json` configures static hosting. No environment variables are required.
+Import the repository with its root as Root Directory. Framework: Other. Build command: `npm run build`. Output directory: `dist`. The included `vercel.json` configures hosting. The public page requires no secrets; online licensing requires the production environment variables documented in [licensing operations](docs/online-licensing.md). `npm run dev` previews static files; use the production `/admin/` for the deployed license API.
 
 ## Access
 

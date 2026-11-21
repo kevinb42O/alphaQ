@@ -2,7 +2,7 @@
 
 Production site: `https://aqxmenu.vercel.app`. Management: `/admin/`. API: `POST /api/license`.
 
-The public website remains static. Vercel's API function uses three production Secret environment variables: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (accepts a modern Supabase secret key), and `AQX_ADMIN_SECRET` (40+ characters). `APP_ORIGIN` optionally overrides the production same-origin administrator check. No server credential is present in the public assets or desktop app.
+The public website remains static. Vercel's API function uses production Secret environment variables: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (accepts a modern Supabase secret key), `AQX_ADMIN_SECRET` (40+ character session signing secret), `AQX_ADMIN_EMAIL`, and `AQX_ADMIN_PASSWORD_HASH`. The password hash uses salted scrypt; the plaintext password belongs only in the owner's private credential store. `APP_ORIGIN` optionally overrides the production same-origin administrator check. No server credential is present in the public assets or desktop app.
 
 Apply `supabase/001_licensing.sql` to install the schema. All license, rate-limit and audit tables use RLS and deny direct `anon` / `authenticated` access. Only the backend service role may use the verification, rate and management functions. These are security-invoker functions with an empty search path.
 
@@ -14,7 +14,7 @@ The native launcher sends the key and a SHA-256 device identifier over certifica
 
 ## Administration
 
-The administrator credential is separate from the owner's permanent application key. Sign in at `/admin/`; the server issues a signed Secure, HttpOnly, SameSite=Strict cookie valid for one hour. Administrator requests require same-origin JSON. Session signatures change if the environment secret is rotated. Login attempts and license requests have persistent database rate limits.
+The administrator email/password is separate from the owner's permanent application key. Sign in at `/admin/`; the server issues a signed Secure, HttpOnly, SameSite=Strict cookie valid for one hour. Administrator requests require same-origin JSON. Session signatures change if the signing secret, email or password hash changes. Login attempts and license requests have persistent database rate limits. Legacy secret-only login is disabled.
 
 Generate keys, save the CSV immediately, and deliver individual keys through Discord. Plaintext generated keys are returned only to the authenticated administrator and are not retained on the server. You can revoke/restore a key or reset its device binding. Labels allow customer tracking without saving keys in plaintext. Avoid putting sensitive customer information into labels.
 
