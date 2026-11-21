@@ -36,6 +36,6 @@ Prices live in `dist/index.html`; `dist/app.js` updates the selected purchase la
 
 Custom artwork uses black and champagne gold: a precision sculpture, macro keycaps and the ALPHA-Q emblem rising behind obsidian mountains. Built-in imagegen prompts are recorded in `art-direction.json`. All artwork and fonts are self-hosted; font licenses are included.
 
-The v4.1.2 loader image is an actual rendered interface preview. Other UI images are project-rendered layouts, not live gameplay. The page makes no measured latency, hit-rate, detection or market-ranking claims.
+The v4.1.2 loader image is an actual rendered interface preview. The Gameplay tab uses a user-supplied in-game DMZ screenshot. Other UI images are project-rendered layouts. The page makes no measured latency, hit-rate, detection or market-ranking claims.
 
 This repository contains website source and public assets only. Application binaries, license keys and backend credentials are excluded.
