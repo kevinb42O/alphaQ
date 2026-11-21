@@ -1,15 +1,29 @@
 const $ = (s, root = document) => root.querySelector(s);
 const $$ = (s, root = document) => [...root.querySelectorAll(s)];
 const menu = $('.menu-toggle');
+$('.header').classList.add('menu-ready');
 menu.addEventListener('click', () => {const open = menu.getAttribute('aria-expanded') !== 'true';menu.setAttribute('aria-expanded', String(open));menu.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');$('#navigation').classList.toggle('open', open);});
 $$('#navigation a').forEach(a => a.addEventListener('click', () => {menu.setAttribute('aria-expanded', 'false');menu.setAttribute('aria-label','Open navigation');$('#navigation').classList.remove('open');}));
 const gallery = {
- aim: {image:'assets/aim-interface.png', label:'AIM SYSTEM', title:'Set the standard.<br>Then make it yours.', description:'Choose your target bone, adjust field of view and distance, and shape the response with smoothing and sway compensation.', features:['Normal and silent aim options','Head-first selection and upper-body fallback','Visibility and team filtering','Configurable auto-fire and autowall']},
- gameplay: {image:'assets/gameplay-screenshot.png', label:'GAMEPLAY', title:'Your session.<br>Your settings.', description:'Explore weapon, camera and session controls in the Gameplay panel. This in-game screenshot shows the menu and preset keys together in DMZ.', features:['No recoil and rapid-fire controls','Anti-aim modes with T pause / resume','Camera FOV, third-person and effects controls','Preset keys available alongside the menu'],caption:'Gameplay panel — user-supplied in-game DMZ screenshot',footnote:'User-supplied in-game screenshot. Shown settings illustrate the interface; they are not a gameplay performance measurement.',width:2935,height:1407},
- launcher: {image:'assets/loader-v4-1-2.png', label:'LOADER V4.1.2', title:'Your new<br>command center.', description:'The new graphite-and-gold loader puts the latest release details, DMZ session selection and community updates in one focused window.', features:['Current v4.1.2 loader interface','Scrollable release improvements','Independent bot aim with B','Anti-aim pause / resume with T']}
+ aim: {image:'assets/aim-interface.png', label:'AIM SYSTEM', title:'Set the standard.<br> Then make it yours.', description:'Choose your target bone, adjust field of view and distance, and shape the response with smoothing and sway compensation.', features:['Normal and silent aim options','Head-first selection and upper-body fallback','Visibility and team filtering','Configurable auto-fire and autowall']},
+ gameplay: {image:'assets/gameplay-screenshot.png', label:'GAMEPLAY', title:'Your session.<br> Your settings.', description:'Explore weapon, camera and session controls in the Gameplay panel. This in-game screenshot shows the menu and preset keys together in DMZ.', features:['No recoil and rapid-fire controls','Anti-aim modes with T pause / resume','Camera FOV, third-person and effects controls','Preset keys available alongside the menu'],caption:'Gameplay panel — user-supplied in-game DMZ screenshot',footnote:'User-supplied in-game screenshot. Shown settings illustrate the interface; they are not a gameplay performance measurement.',width:2935,height:1407},
+ launcher: {image:'assets/loader-v4-1-2.png', label:'LOADER V4.1.2', title:'Your new<br> command center.', description:'The new graphite-and-gold loader puts the latest release details, DMZ session selection and community updates in one focused window.', features:['Current v4.1.2 loader interface','Scrollable release improvements','Independent bot aim with B','Anti-aim pause / resume with T']}
 };
 function setTab(tab) {const data = gallery[tab.dataset.tab];const caption=data.caption||`${data.label.toLowerCase()} — rendered interface preview`;$$('[data-tab]').forEach(b => {const active = b === tab;b.setAttribute('aria-selected',String(active));b.tabIndex = active ? 0 : -1;});$('#gallery-panel').setAttribute('aria-labelledby',tab.id);$('#gallery-screen').src = data.image;$('#gallery-screen').alt = caption;$('#gallery-screen').width=data.width||1004;$('#gallery-screen').height=data.height||784;$('#gallery-label').textContent = data.label;$('#gallery-title').innerHTML = data.title;$('#gallery-description').textContent = data.description;$('#gallery-features').replaceChildren(...data.features.map(text => {const li=document.createElement('li');li.textContent=text;return li;}));$('#gallery-zoom').dataset.image=data.image;$('#gallery-zoom').dataset.caption=caption;$('.gallery-footnote').textContent=data.footnote||'Settings shown are illustrative. Interface previews are rendered from the project, rather than live gameplay captures.';$('.image-tag').textContent=tab.dataset.tab==='gameplay'?'IN-GAME SCREENSHOT':'INTERFACE PREVIEW';}
-$$('[data-tab]').forEach((tab,i,all) => {tab.addEventListener('click', () => setTab(tab));tab.addEventListener('keydown',e=>{let next;if(e.key==='ArrowRight') next=(i+1)%all.length;if(e.key==='ArrowLeft') next=(i+all.length-1)%all.length;if(e.key==='Home') next=0;if(e.key==='End') next=all.length-1;if(next!==undefined){e.preventDefault();setTab(all[next]);all[next].focus();}});});
+let galleryTransition;
+function changeTab(tab) {
+  if (tab.getAttribute('aria-selected') === 'true') return;
+  setTab(tab);
+  galleryTransition?.cancel();
+
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    galleryTransition = $('#gallery-screen').animate(
+      [{ opacity: 0.55, clipPath: 'inset(0 12% 0 0)' }, { opacity: 1, clipPath: 'inset(0)' }],
+      { duration: 300, easing: 'cubic-bezier(.16, 1, .3, 1)' }
+    );
+  }
+}
+$$('[data-tab]').forEach((tab,i,all) => {tab.addEventListener('click', () => changeTab(tab));tab.addEventListener('keydown',e=>{let next;if(e.key==='ArrowRight') next=(i+1)%all.length;if(e.key==='ArrowLeft') next=(i+all.length-1)%all.length;if(e.key==='Home') next=0;if(e.key==='End') next=all.length-1;if(next!==undefined){e.preventDefault();changeTab(all[next]);all[next].focus();}});});
 const dialog=$('#image-dialog');let imageTrigger=null;
 $$('[data-image]').forEach(button=>button.addEventListener('click',()=>{imageTrigger=button;$('#lightbox-image').src=button.dataset.image;$('#lightbox-image').alt=button.dataset.caption;$('#image-caption').textContent=button.dataset.caption;dialog.showModal();}));
 $('#close-image').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});dialog.addEventListener('close',()=>imageTrigger?.focus());
@@ -39,13 +53,4 @@ $$('a[href^="#"]').forEach(link=>link.addEventListener('click',event=>{
   target.focus({preventScroll:true});target.scrollIntoView({block:'start',behavior:'instant'});
 }));
 
-// Progressive enhancements keep the complete page usable without animation.
-const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
-if('IntersectionObserver' in window&&!reducedMotion){
-  const reveal=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');reveal.unobserve(entry.target);}});},{threshold:.08});
-  $$('.section-heading,.feature-grid article,.loader-heading,.loader-stage,.controls-copy,.demo-container,.pricing-heading,.pricing-options,.faq>div,.philosophy-content').forEach(el=>{el.classList.add('reveal-ready');reveal.observe(el);});
-}
-let scrollTick=false;
-function updateScroll(){const max=document.documentElement.scrollHeight-innerHeight;$('.reading-progress').style.transform=`scaleX(${max>0?Math.min(1,scrollY/max):0})`;$('.header').classList.toggle('is-scrolled',scrollY>110);scrollTick=false;}
-addEventListener('scroll',()=>{if(!scrollTick){requestAnimationFrame(updateScroll);scrollTick=true;}},{passive:true});updateScroll();
 if('IntersectionObserver' in window){const links=$$('#navigation a[href^="#"]');const spy=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.hash==='#'+entry.target.id));}},{rootMargin:'-10% 0px -65% 0px'});links.forEach(a=>{const section=$(a.hash);if(section)spy.observe(section);});}
