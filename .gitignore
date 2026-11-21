@@ -1,0 +1,6 @@
+*.zip
+artwork-originals/
+node_modules/
+.env
+.env.*
+qa/

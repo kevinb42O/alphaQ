@@ -1,0 +1,31 @@
+{
+  "generation": [
+    {
+      "asset": "hero",
+      "prompt": "Use case: ads-marketing. Create an exceptional luxury technology website hero artwork, wide landscape 3:2 composition. Abstract precision optical sculpture: enormous concentric machined obsidian rings with very fine brushed champagne-gold beveled edges, nested like an impossible high-end optical instrument, a small dark central aperture. Sculptural form fills the RIGHT TWO THIRDS, angled slightly toward camera, gracefully cropped at right. LEFT THIRD is almost pure black negative space, smooth seamless fade, intended for HTML text overlay. Black-on-black materials, micro-machined concentric grooves, subtle gold rim lighting, atmospheric dust only very sparingly, deep cinematic shadows, expensive studio product photography, exquisite tactile material detail, understated precision. Color palette nearly black #0b0c0a, graphite, pale brass #d9b77a, no orange. Subdued lighting, luminous edges without neon glow. No text, no letters, no logos, no UI, no screens, no weapons, no people. This is abstract brand artwork for ALPHA-Q, not a physical product being advertised. Strong sophisticated art direction, premium watch campaign quality.",
+      "tool": "built-in imagegen"
+    },
+    {
+      "asset": "terrain",
+      "prompt": "Use case: ads-marketing. A panoramic luxury brand landscape artwork, wide 3:2 image suitable for a cinematic horizontal banner crop. A vast nearly black obsidian mountain landscape with delicate veins of pale champagne gold along sharp ridgelines. View low across layered dark mineral dunes, dramatic broad valley from left foreground to distant center-right, mountains and faint dark sky. Extremely tactile fine striations like machined black rock, a few luminous fine golden seams catching grazing light. Photorealistic high-end editorial landscape meets abstract sculptural material study. Restrained and expensive, deep charcoal blacks #0b0c0a and muted champagne #d9b77a, soft volumetric haze, no saturated orange, no orange sunset. Top third deep black and low detail for a headline overlay. No text, no numbers, no UI, no logos, no people, no buildings, no weapons, no game screenshot. Cinematic, confident, spare, unforgettable detail.",
+      "tool": "built-in imagegen"
+    },
+    {
+      "asset": "keyboard",
+      "prompt": "Use case: ads-marketing. Luxury macro product-style photograph used as abstract brand artwork for a customizable software-controls website. Extreme close-up of a small cluster of three sculptural black mechanical keyboard keycaps, no visible letters or symbols, precisely machined and softly concave, one key has a very thin brushed champagne-gold rim, other keycaps almost disappear into the graphite darkness. View from a low three-quarter angle, shallow depth of field, keys arranged diagonally from bottom left to upper right. Black anodized metal, fine tactile material grain, subtle pale gold edge reflections. Premium industrial design editorial photography, like a luxury watch campaign, perfectly controlled black studio lighting. Leave upper third dark negative space. Restrained, no neon RGB, no colored lighting, no gaming clich\u00e9s, no hands, no text, no logos, no letters, no screen. Landscape 3:2. Nearly black #0b0c0a and champagne #d9b77a. This is conceptual atmospheric artwork, not a branded physical keyboard product.",
+      "tool": "built-in imagegen"
+    }
+  ],
+  "assets": [
+    "dist/assets/precision-sculpture.webp",
+    "dist/assets/obsidian-landscape.webp",
+    "dist/assets/keycraft.webp"
+  ],
+  "purpose": "Conceptual brand artwork, not product screenshots or gameplay.",
+  "tool": "Built-in imagegen",
+  "mountain_logo_revision": {
+    "asset": "dist/assets/obsidian-logo-landscape.webp",
+    "tool": "built-in imagegen",
+    "prompt": "Preserve the obsidian mountain landscape; integrate the exact ALPHA-Q gold triangular logo emerging monumentally from behind the right distant ridge. Lower third occluded by mountains, brushed champagne metal, restrained rim lighting, cinematic haze, dark left negative space. No text or extra logos."
+  }
+}
