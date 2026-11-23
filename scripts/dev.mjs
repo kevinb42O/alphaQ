@@ -13,8 +13,15 @@ const preview=args.includes('--preview');
 const clients=new Set();
 const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.ttf':'font/ttf','.txt':'text/plain; charset=utf-8'};
 const server=http.createServer(async(req,res)=>{
-  let pathname;
-  try{pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);}catch{res.writeHead(400).end('Bad request');return;}
+  let pathname,search;
+  try{const url=new URL(req.url,'http://localhost');pathname=decodeURIComponent(url.pathname);search=url.search;}catch{res.writeHead(400).end('Bad request');return;}
+  if(pathname==='/admin'){res.writeHead(308,{Location:'/admin/'+search}).end();return;}
+  if(pathname==='/api/license'){
+    res.writeHead(501,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'}).end(JSON.stringify({
+      ok:false,message:'This local preview has no login service. Open aqxmenu.vercel.app/admin/ to sign in.'
+    }));
+    return;
+  }
   if(pathname==='/__dev_events'&&!preview){res.writeHead(200,{'Content-Type':'text/event-stream','Cache-Control':'no-cache','Connection':'keep-alive'});res.write(': connected\n\n');clients.add(res);req.on('close',()=>clients.delete(res));return;}
   let file=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));
   if(file!==root&&!file.startsWith(root+path.sep)){res.writeHead(403).end('Forbidden');return;}

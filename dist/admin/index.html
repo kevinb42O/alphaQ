@@ -1,7 +1,170 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>AQx License Administration</title><link rel="stylesheet" href="admin.css"><script src="admin.js" defer></script></head><body><header><a href="/">AQx</a><span>License administration</span><button id="logout" hidden>Sign out</button></header><main>
-<section id="login"><span class="eyebrow">AQx / PRIVATE ADMINISTRATION</span><h1>Your private control room.</h1><p>Sign in to generate license keys, manage access and export your next batch.</p><form id="login-form"><label>Email address<input id="email" type="email" autocomplete="username" maxlength="254" required></label><label>Password<input id="password" type="password" autocomplete="current-password" maxlength="256" required></label><button>Sign in</button></form><p class="login-note">Administrator access is separate from your permanent application key.</p></section>
-<p id="status" role="status" aria-live="polite"></p>
-<section id="dashboard" hidden><div class="heading"><h1>Licenses</h1><button id="refresh">Refresh</button></div><p>Time begins on first activation. Device resets preserve the original expiry.</p><form id="create-form"><label>Duration<select id="days"><option value="1">1 day</option><option value="3">3 days</option><option value="30">30 days</option><option value="7">7 days (legacy)</option><option value="0">Permanent owner</option></select></label><label>Quantity<input id="count" type="number" min="1" max="100" value="10" required></label><label>Label / customer<input id="label" maxlength="120" placeholder="Optional sales reference"></label><button>Generate keys</button></form>
-<section id="new-keys" hidden><h2>Save these keys now</h2><p>The server stores only hashes. Download or copy this list before leaving.</p><textarea id="key-output" rows="8" readonly aria-label="New license keys"></textarea><button id="download">Download CSV</button><button id="copy">Copy keys</button><button id="clear-export">Clear displayed keys</button></section>
-<label>Find a license<input id="filter" placeholder="Label, customer, status or ID"></label><div class="table-wrap"><table><thead><tr><th>Label / ID</th><th>Duration</th><th>Status</th><th>Activated (UTC)</th><th>Expires (UTC)</th><th>Device</th><th>Actions</th></tr></thead><tbody id="licenses"></tbody></table></div><p id="totals"></p><h2>Recent activity</h2><div id="audit"></div></section>
-</main><dialog id="confirmation"><h2 id="confirm-title">Confirm action</h2><p id="confirm-text"></p><button id="confirm-action">Confirm</button><button id="cancel-action">Cancel</button></dialog></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>AQx License Administration</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+  <script src="/admin/admin.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="AQx homepage">AQ<span>x</span></a>
+      <span class="brand-context">License administration</span>
+      <nav id="admin-nav" aria-label="Administration" hidden>
+        <button type="button" class="nav-link" data-view="licenses" aria-current="page">Licenses</button>
+        <button type="button" class="nav-link" data-view="activity">Activity</button>
+      </nav>
+      <button type="button" id="logout" class="button button-quiet" hidden>Sign out</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="session-check" class="sign-in" aria-labelledby="session-title">
+      <h1 id="session-title">License administration</h1>
+      <p role="status">Checking your session…</p>
+      <noscript>Enable JavaScript to sign in and manage licenses.</noscript>
+    </section>
+    <section id="login" class="sign-in" aria-labelledby="login-title" hidden>
+      <h1 id="login-title">Sign in to AQx Admin</h1>
+      <p>Use your administrator email and password.</p>
+      <form id="login-form" class="field-stack" method="post">
+        <label for="email">Email address</label>
+        <input id="email" type="email" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="254" required>
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" maxlength="256" required>
+        <p id="login-message" class="feedback" role="status" hidden></p>
+        <button class="button button-primary" id="sign-in">Sign in</button>
+      </form>
+    </section>
+
+    <div id="dashboard" class="workspace" hidden>
+      <div id="dashboard-message" class="feedback workspace-feedback" role="status" hidden></div>
+      <section id="licenses-view" aria-labelledby="licenses-title">
+        <div class="page-heading">
+          <div>
+            <h1 id="licenses-title" tabindex="-1">Licenses</h1>
+            <p id="totals" class="summary"></p>
+          </div>
+          <button type="button" id="open-create" class="button button-primary">
+            <svg class="icon" aria-hidden="true" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></svg>
+            <span id="create-label">Generate keys</span>
+          </button>
+        </div>
+        <div class="toolbar">
+          <div class="search-field">
+            <label for="filter" class="sr-only">Search licenses</label>
+            <svg class="icon" aria-hidden="true" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.25"/><path d="m10.2 10.2 3 3"/></svg>
+            <input id="filter" type="search" placeholder="Search label, status or ID" autocomplete="off">
+          </div>
+          <label for="state-filter" class="sr-only">Filter by license status</label>
+          <select id="state-filter">
+            <option value="">All statuses</option>
+            <option>Unused</option>
+            <option>Active</option>
+            <option>Expired</option>
+            <option>Revoked</option>
+            <option>Awaiting new device</option>
+          </select>
+          <button type="button" id="refresh" class="button button-secondary" data-refresh>Refresh</button>
+        </div>
+        <div class="records" id="license-records">
+          <div class="table-heading" aria-hidden="true">
+            <span>License</span><span>Status</span><span>Duration</span><span>Expires (UTC)</span><span></span>
+          </div>
+          <ul id="licenses" class="license-list" aria-label="Licenses"></ul>
+          <div id="list-empty" class="empty" hidden>
+            <p id="empty-message" role="status"></p>
+            <button type="button" id="clear-filters" class="button button-secondary" hidden>Clear filters</button>
+          </div>
+        </div>
+        <p id="results-count" class="list-caption" aria-live="polite"></p>
+      </section>
+
+      <section id="activity-view" aria-labelledby="activity-title" hidden>
+        <div class="page-heading">
+          <div>
+            <h1 id="activity-title" tabindex="-1">Activity</h1>
+            <p class="summary">Latest 50 license events · UTC</p>
+          </div>
+          <button type="button" class="button button-secondary" data-refresh>Refresh</button>
+        </div>
+        <ul id="audit" class="records audit-list" aria-label="Recent license activity"></ul>
+        <p id="audit-empty" class="records empty" hidden>No license activity yet.</p>
+      </section>
+    </div>
+  </main>
+
+  <dialog id="details" class="drawer" aria-labelledby="detail-title">
+    <div class="drawer-layout">
+      <div class="drawer-header">
+        <div>
+          <span id="detail-status" class="badge"></span>
+          <h2 id="detail-title" tabindex="-1" autofocus></h2>
+        </div>
+        <button type="button" class="button button-quiet" data-close>Close</button>
+      </div>
+      <div class="drawer-content">
+        <dl id="detail-fields" class="detail-fields"></dl>
+        <p id="detail-message" class="feedback" role="status" hidden></p>
+      </div>
+      <div class="drawer-footer">
+        <button type="button" id="reset-device" class="button button-secondary">Reset device</button>
+        <button type="button" id="change-access" class="button"></button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="create" class="drawer" aria-labelledby="create-title">
+    <div class="drawer-layout">
+      <div class="drawer-header">
+        <h2 id="create-title" tabindex="-1" autofocus>Generate keys</h2>
+        <button type="button" id="close-create" class="button button-quiet" data-close>Close</button>
+      </div>
+      <div class="drawer-content">
+        <form id="create-form" class="field-stack">
+          <label for="days">Duration</label>
+          <select id="days">
+            <option value="1">1 day</option>
+            <option value="3">3 days</option>
+            <option value="30">30 days</option>
+            <option value="7">7 days (legacy)</option>
+            <option value="0">Permanent owner</option>
+          </select>
+          <p class="field-hint">Timed licenses start on first activation.</p>
+          <label for="count">Quantity</label>
+          <input id="count" type="number" min="1" max="100" step="1" value="10" required>
+          <label for="label">Label <span class="optional">Optional</span></label>
+          <input id="label" maxlength="120" placeholder="Customer or sales reference">
+        </form>
+        <section id="new-keys" class="field-stack" aria-label="Generated keys" hidden>
+          <p>Download or copy this batch before leaving. Full keys are only available in this tab after generation.</p>
+          <label for="key-output">License keys</label>
+          <textarea id="key-output" rows="8" readonly spellcheck="false"></textarea>
+        </section>
+        <p id="create-message" class="feedback" role="status" hidden></p>
+      </div>
+      <div class="drawer-footer" id="create-actions">
+        <button id="generate" class="button button-primary" form="create-form">Generate keys</button>
+      </div>
+      <div class="drawer-footer export-actions" id="export-actions" hidden>
+        <button type="button" id="download" class="button button-primary">Download CSV</button>
+        <button type="button" id="copy" class="button button-secondary">Copy keys</button>
+        <button type="button" id="clear-export" class="button button-quiet">Clear displayed keys</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="confirmation" class="confirmation" aria-labelledby="confirm-title" aria-describedby="confirm-text">
+    <h2 id="confirm-title"></h2>
+    <p id="confirm-text"></p>
+    <p id="confirm-message" class="feedback" role="status" hidden></p>
+    <div class="confirm-actions">
+      <button type="button" id="cancel-action" class="button button-secondary" data-close autofocus>Cancel</button>
+      <button type="button" id="confirm-action" class="button"></button>
+    </div>
+  </dialog>
+</body>
+</html>

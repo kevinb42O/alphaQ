@@ -15,5 +15,15 @@ assert(!html.includes('data-days="7"'),'Outdated 7-day pricing');
 assert(html.includes('obsidian-logo-landscape.webp')&&html.includes('loader-v4-1-2.png'),'Missing latest artwork/loader');
 async function scan(dir){for(const entry of await readdir(dir,{withFileTypes:true})){const file=path.join(dir,entry.name);if(entry.isDirectory())await scan(file);else{assert(!/\.(exe|dll|env|csv)$/i.test(entry.name),'Private or executable file in public assets');if(/\.(html|js|css)$/i.test(entry.name)){const s=await readFile(file,'utf8');assert(!/ALQ1-[A-F0-9]{4}-/.test(s),'License key in public source');}}}}
 await scan(dist);
-console.log('PASS: assets, anchors, unique IDs, Discord links, 1/3/30-day prices, latest artwork, loader and public-file checks.');
+const admin=await readFile(path.join(dist,'admin','index.html'),'utf8');
+const adminIds=[...admin.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]);
+assert.equal(adminIds.length,new Set(adminIds).size,'Duplicate admin HTML IDs');
+for(const ref of [...admin.matchAll(/(?:src|href)="([^"]+\.(?:css|js))"/g)].map(match=>match[1])){
+  assert(ref.startsWith('/admin/'),`Admin assets must load from either admin URL: ${ref}`);
+  await access(path.join(dist,ref));
+}
+const vercel=JSON.parse(await readFile(path.join(root,'vercel.json'),'utf8'));
+assert(vercel.redirects?.some(rule=>rule.source==='/admin'&&rule.destination==='/admin/'),
+  'Vercel must redirect /admin to /admin/');
+console.log('PASS: public and admin assets, anchors, unique IDs, Discord links, prices, artwork, loader and admin routing.');
 console.log('Static production output ready: dist/');

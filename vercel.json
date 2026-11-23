@@ -4,5 +4,6 @@
   "outputDirectory": "dist",
   "regions": ["dub1"],
   "functions": {"api/license.js":{"maxDuration":30}},
+  "redirects": [{"source": "/admin", "destination": "/admin/", "permanent": true}],
   "headers": [{"source": "/(.*)", "headers": [{"key":"X-Content-Type-Options","value":"nosniff"},{"key":"Referrer-Policy","value":"strict-origin-when-cross-origin"}]},{"source":"/admin/(.*)","headers":[{"key":"Cache-Control","value":"no-store"},{"key":"X-Robots-Tag","value":"noindex, nofollow"},{"key":"Content-Security-Policy","value":"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"}]}]
 }
