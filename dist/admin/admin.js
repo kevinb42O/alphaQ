@@ -10,6 +10,7 @@ const confirmation = $('#confirmation');
 let rows = [];
 let audit = [];
 let activeLicenseId;
+let historyRequest = 0;
 let activeView = 'licenses';
 let authenticated = false;
 let hasLoaded = false;
@@ -86,6 +87,7 @@ function showSignIn(message = '', tone = 'info', focus = false) {
   $('#confirm-text').textContent = '';
   confirmOperation = undefined;
   activeLicenseId = undefined;
+  clearHistory();
   $('#key-output').value = '';
   $('#password').value = '';
   $('#session-check').hidden = true;
@@ -105,9 +107,9 @@ function showWorkspace() {
   if (batch && !$('#key-output').value) renderBatch();
 }
 
-function formatTime(value) {
+function formatTime(value, showSeconds = false) {
   if (!value) return '—';
-  return new Date(value).toISOString().slice(0, 16).replace('T', ' ');
+  return new Date(value).toISOString().slice(0, showSeconds ? 19 : 16).replace('T', ' ');
 }
 
 function state(license) {
@@ -372,7 +374,9 @@ function renderDetails(license) {
     ['Activated (UTC)', formatTime(license.activated_at)],
     ['Expires (UTC)', expiry(license)],
     ['Device binding', license.device_hash ? 'Bound · ' + license.device_hash.slice(0, 8) : 'Not bound'],
-    ['Last seen (UTC)', formatTime(license.last_seen_at)],
+    ['Latest launcher check (UTC)', formatTime(license.last_seen_at, true)],
+    ['Previous launcher check (UTC)', formatTime(license.previous_seen_at, true)],
+    ['Checks recorded since tracking began', String(license.successful_checks ?? 0)],
     ['Device resets', String(license.reset_count ?? 0)]
   ];
   $('#detail-fields').replaceChildren(...values.map(([label, value]) => {
@@ -394,13 +398,52 @@ function openDetails(event) {
   feedback('#detail-message');
   renderDetails(license);
   detailDialog.showModal();
+  loadHistory(license.id);
 }
+
+function clearHistory(message = '') {
+  $('#checks-message').textContent = message;
+  $('#checks').replaceChildren();
+  $('#retry-checks').hidden = true;
+}
+
+async function loadHistory(id) {
+  const request = ++historyRequest;
+  const isCurrent = () => request === historyRequest && detailDialog.open && activeLicenseId === id;
+  clearHistory('Loading launcher history…');
+  try {
+    const { checks } = await api('history', { id });
+    if (!isCurrent()) return;
+    const list = $('#checks');
+    $('#checks-message').textContent = checks.length
+      ? 'Up to 50 recent successful checks · UTC'
+      : 'No checks recorded in the timeline yet.';
+    list.replaceChildren(...checks.map(check => {
+      const item = document.createElement('li');
+      const time = element('time', '', formatTime(check, true));
+      time.dateTime = check;
+      item.append(time);
+      return item;
+    }));
+  } catch (error) {
+    if (!isCurrent() || handleSessionError(error)) return;
+    clearHistory(error.message);
+    $('#retry-checks').hidden = false;
+  }
+}
+
+$('#retry-checks').addEventListener('click', () => {
+  if (activeLicenseId) loadHistory(activeLicenseId);
+});
 
 $('#licenses').addEventListener('click', openDetails);
 $('#audit').addEventListener('click', openDetails);
 detailDialog.addEventListener('close', () => {
+  if (detailDialog.open) return;
   const previousId = activeLicenseId;
   activeLicenseId = undefined;
+  historyRequest += 1;
+  clearHistory();
   if (authenticated && document.activeElement === document.body) {
     const trigger = Array.from(document.querySelectorAll('#' + activeView + '-view button[data-id]'))
       .find(button => button.dataset.id === previousId);

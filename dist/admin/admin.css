@@ -337,6 +337,12 @@ body:has(dialog[open]) { overflow: hidden; }
 }
 dt { color: var(--muted); }
 dd { margin: 0; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.check-history { margin-top: 1.5rem; font-size: .875rem; }
+.check-history h3 { margin: 0 0 .45rem; font-size: 1rem; }
+.check-history ol { margin: .5rem 0 0; padding-left: 1.35rem; font-variant-numeric: tabular-nums; }
+.check-history li { padding-block: .35rem; }
+.check-history li::marker { color: var(--muted); }
+.check-history button { margin-top: .65rem; }
 #new-keys p { margin-bottom: .5rem; }
 #key-output { font: .875rem/1.7 ui-monospace, "SF Mono", Consolas, monospace; overflow-wrap: anywhere; }
 .confirmation { width: min(100% - 2rem, 28rem); padding: 1.35rem; border-radius: 14px; }

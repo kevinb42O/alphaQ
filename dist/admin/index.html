@@ -109,6 +109,12 @@
       <div class="drawer-content">
         <dl id="detail-fields" class="detail-fields"></dl>
         <p id="detail-message" class="feedback" role="status" hidden></p>
+        <section class="check-history" aria-labelledby="checks-title">
+          <h3 id="checks-title">Launcher history</h3>
+          <p id="checks-message" role="status"></p>
+          <ol id="checks" class="check-list" aria-label="Successful launcher checks, newest first"></ol>
+          <button type="button" id="retry-checks" class="button button-secondary" hidden>Retry history</button>
+        </section>
       </div>
       <div class="drawer-footer">
         <button type="button" id="reset-device" class="button button-secondary">Reset device</button>

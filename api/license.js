@@ -1,5 +1,6 @@
 import {sha,normalize,generateKey,equal,session,validSession,database,rate,verifyPassword} from '../lib/licensing.mjs';
 const ORIGIN='https://aqxmenu.vercel.app';
+const LICENSE_ID=/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i;
 export default async function handler(req,res){
  res.setHeader('Cache-Control','no-store, private');res.setHeader('X-Content-Type-Options','nosniff');
  const plain=(req.headers.accept||'').includes('text/plain');
@@ -33,8 +34,16 @@ export default async function handler(req,res){
   const token=(req.headers.cookie||'').split(';').map(s=>s.trim()).find(s=>s.startsWith('__Host-aqx_admin='))?.slice('__Host-aqx_admin='.length);
   if(!token||!validSession(token,sessionSecret))return send(401,{ok:false,message:'Sign in to manage licenses.'});
   if(action==='list'){
-   const licenses=await database('aqx_licenses?select=id,label,duration_days,created_at,activated_at,expires_at,device_hash,revoked,last_seen_at,reset_count&order=created_at.desc&limit=1000',{method:'GET'});
-   const audit=await database('aqx_audit?select=id,created_at,license_id,action&order=id.desc&limit=50',{method:'GET'});return send(200,{ok:true,licenses,audit});
+   const [licenses,audit]=await Promise.all([
+    database('aqx_licenses?select=id,label,duration_days,created_at,activated_at,expires_at,device_hash,revoked,last_seen_at,previous_seen_at,successful_checks,reset_count&archived_at=is.null&order=created_at.desc&limit=1000',{method:'GET'}),
+    database('aqx_visible_audit?select=id,created_at,license_id,action&order=id.desc&limit=50',{method:'GET'})
+   ]);
+   return send(200,{ok:true,licenses,audit});
+  }
+  if(action==='history'){
+   if(typeof body.id!=='string'||!LICENSE_ID.test(body.id))return send(400,{ok:false,message:'Invalid license ID.'});
+   const checks=await database('aqx_license_checks?select=checked_at,aqx_licenses!inner()&license_id=eq.'+body.id+'&aqx_licenses.archived_at=is.null&order=id.desc&limit=50',{method:'GET'});
+   return send(200,{ok:true,checks:checks.map(check=>check.checked_at)});
   }
   if(action==='create'){
    const days=Number(body.days),count=Number(body.count);if(![0,1,3,7,30].includes(days)||!Number.isInteger(count)||count<1||count>100)return send(400,{ok:false,message:'Select a valid duration and 1–100 keys.'});
@@ -44,7 +53,7 @@ export default async function handler(req,res){
    return send(200,{ok:true,keys,days,message:'Save this list now. Full keys are not stored on the server.'});
   }
   if(['revoke','restore','reset_device'].includes(action)){
-   if(typeof body.id!=='string'||!/^[a-f0-9-]{36}$/i.test(body.id))return send(400,{ok:false,message:'Invalid license ID.'});
+   if(typeof body.id!=='string'||!LICENSE_ID.test(body.id))return send(400,{ok:false,message:'Invalid license ID.'});
    const result=await database('rpc/aqx_manage',{body:{p_id:body.id,p_action:action}});return send(200,result);
   }
   return send(400,{ok:false,message:'Unknown action.'});
