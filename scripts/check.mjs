@@ -11,7 +11,7 @@ for(const ref of refs){if(ref.startsWith('#')){assert(ref==='#'||ids.includes(re
 const discord=refs.filter(r=>r.includes('discord.gg/'));
 assert(discord.length>=3&&discord.every(r=>r==='https://discord.gg/VzHWpB7uG'),'Discord invite mismatch');
 const plans=[...html.matchAll(/data-days="(\d+)" data-price="([\d.]+)"/g)].map(match=>match.slice(1));
-assert.deepEqual(plans,[['1','5'],['3','7.50'],['7','10'],['30','15']],'Pricing mismatch');
+assert.deepEqual(plans,[['1','5'],['3','7.50'],['7','10'],['30','15'],['0','65']],'Pricing mismatch');
 assert(html.includes('obsidian-logo-landscape.webp')&&html.includes('release-5-1-2/loader.webp'),'Missing latest artwork/loader');
 const menuTabs=[...html.matchAll(/data-tab="([a-z]+)"/g)].map(match=>match[1]);
 assert.deepEqual(menuTabs,['aim','esp','hud','gameplay','lobby','presets'],'Missing or out-of-order menu tabs');

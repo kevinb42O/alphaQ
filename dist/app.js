@@ -101,7 +101,23 @@ galleryTabs.forEach((tab, index) => {
 const dialog=$('#image-dialog');let imageTrigger=null;
 $$('[data-image]').forEach(button=>button.addEventListener('click',()=>{imageTrigger=button;$('#lightbox-image').src=button.dataset.image;$('#lightbox-image').alt=button.dataset.caption;$('#image-caption').textContent=button.dataset.caption;dialog.showModal();}));
 $('#close-image').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});dialog.addEventListener('close',()=>imageTrigger?.focus());
-$$('[data-days]').forEach(button=>button.addEventListener('click',()=>{const days=button.dataset.days,price=Number(button.dataset.price).toFixed(2);$$('[data-days]').forEach(b=>{b.classList.toggle('selected',b===button);b.setAttribute('aria-pressed',String(b===button));});$('#duration-summary').textContent=`${days}-day access · €${price}`;$('#access-link').textContent=`Get ${days} ${days==='1'?'day':'days'} — €${price}`;}));
+const accessPlans = $$('[data-days]');
+for (const plan of accessPlans) {
+  plan.addEventListener('click', () => {
+    const days = plan.dataset.days;
+    const price = Number(plan.dataset.price).toFixed(2);
+    const lifetime = days === '0';
+    for (const option of accessPlans) {
+      const selected = option === plan;
+      option.classList.toggle('selected', selected);
+      option.setAttribute('aria-pressed', String(selected));
+    }
+    const summary = lifetime ? 'Lifetime access' : `${days}-day access`;
+    const duration = lifetime ? 'lifetime access' : `${days} ${days === '1' ? 'day' : 'days'}`;
+    $('#duration-summary').textContent = `${summary} · €${price}`;
+    $('#access-link').textContent = `Get ${duration} — €${price}`;
+  });
+}
 $('#year').textContent=new Date().getFullYear();
 
 // Move keyboard focus with same-page navigation so a previously focused control
