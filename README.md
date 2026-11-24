@@ -1,6 +1,6 @@
 # AQx website
 
-Premium graphite-and-gold one-page website with custom artwork, the v5.1.2 loader, a six-tab menu gallery and release notes, a custom key-binding demo and Discord delivery.
+Premium graphite-and-gold one-page website with custom artwork, the v5.1.2 loader, a six-tab menu gallery, release notes and Discord delivery.
 
 ## Development
 
@@ -30,7 +30,7 @@ Import the repository with its root as Root Directory. Framework: Other. Build c
 
 1 day €5.00 / 3 days €7.50 / 30 days €10.00. Keys and builds are delivered manually through [Discord](https://discord.gg/VzHWpB7uG). Online licensing uses Vercel and Supabase; the private management page is `/admin/`. Payment processing remains manual. See [online licensing operations](docs/online-licensing.md).
 
-Prices live in `dist/index.html`; `dist/app.js` updates the selected purchase label. The interactive preset demo stores browser-local bindings only and does not change the application.
+Prices live in `dist/index.html`; `dist/app.js` updates the selected purchase label.
 
 ## Assets
 

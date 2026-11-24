@@ -399,3 +399,7 @@ body { caret-color: var(--gold); }
   .gallery-tabs button { font-size: .875rem; }
   .release-captures, .release-topics dl { grid-template-columns: 1fr; }
 }
+
+.preset-preview { margin: 0; }
+.preset-preview img { display: block; width: 100%; border: 1px solid var(--line); }
+.preset-preview figcaption { margin-top: 14px; color: var(--muted); font-size: .875rem; }
