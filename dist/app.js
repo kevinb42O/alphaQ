@@ -5,11 +5,72 @@ $('.header').classList.add('menu-ready');
 menu.addEventListener('click', () => {const open = menu.getAttribute('aria-expanded') !== 'true';menu.setAttribute('aria-expanded', String(open));menu.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');$('#navigation').classList.toggle('open', open);});
 $$('#navigation a').forEach(a => a.addEventListener('click', () => {menu.setAttribute('aria-expanded', 'false');menu.setAttribute('aria-label','Open navigation');$('#navigation').classList.remove('open');}));
 const gallery = {
- aim: {image:'assets/aim-interface.png', label:'AIM SYSTEM', title:'Set the standard.<br> Then make it yours.', description:'Choose your target bone, adjust field of view and distance, and shape the response with smoothing and sway compensation.', features:['Normal and silent aim options','Head-first selection and upper-body fallback','Visibility and team filtering','Configurable auto-fire and autowall']},
- gameplay: {image:'assets/gameplay-screenshot.png', label:'GAMEPLAY', title:'Your session.<br> Your settings.', description:'Explore weapon, camera and session controls in the Gameplay panel. This in-game screenshot shows the menu and preset keys together in DMZ.', features:['No recoil and rapid-fire controls','Anti-aim modes with T pause / resume','Camera FOV, third-person and effects controls','Preset keys available alongside the menu'],caption:'Gameplay panel — user-supplied in-game DMZ screenshot',footnote:'User-supplied in-game screenshot with updated branding. Shown settings illustrate the interface; they are not a gameplay performance measurement.',width:2935,height:1407},
- launcher: {image:'assets/loader-v4-1-2.png', label:'LOADER V4.1.2', title:'Your new<br> command center.', description:'The new graphite-and-gold loader puts the latest release details, DMZ session selection and community updates in one focused window.', features:['Current v4.1.2 loader interface','Scrollable release improvements','Independent bot aim with B','Anti-aim pause / resume with T']}
+  esp: {
+    title: 'ESP range and colours',
+    alt: 'ESP tab with range controls, category buttons and visibility colours',
+    description: 'Set the range, choose a colour pair for each category and decide which elements to display.',
+    features: ['Maximum range of 2,500 m with automatic distance fading', 'Visible and invisible colours for Players, Team, Bots, World and Equipment', 'Individual switches for boxes, bones, names and other overlays']
+  },
+  hud: {
+    title: 'Reticles and awareness',
+    alt: 'HUD tab with reticle settings, an Alpha-Q logo preview, awareness and tracers',
+    description: 'Fine-tune your reticle with a live preview alongside your awareness and tracer controls.',
+    features: ['Precision, Heart, Quackshot, Alpha-Q logo, Devil face and Pentagram', 'Transparent Devil face artwork with a fixed centre dot', 'Size, thickness and outline controls plus adjustable RGB cycling']
+  },
+  gameplay: {
+    title: 'Camera and gameplay',
+    alt: 'Gameplay tab with camera, spin and weapon settings',
+    description: 'Adjust your view and set up the controls you use during a session.',
+    features: ['Camera scale from 60% to 200%', 'Camera settings saved separately from presets', 'Remappable spin pause with OFF, PAUSED, WAITING, AIM and ON states']
+  },
+  lobby: {
+    title: 'Lobby overview',
+    alt: 'Lobby tab with example player rows and the preset sidebar',
+    description: 'See the Lobby tab’s player table and keep your presets within reach.',
+    features: ['Player table in a dedicated tab', 'Collapsible preset sidebar', 'Camera and spin changes for lobby transitions in v5.1.2']
+  },
+  presets: {
+    title: 'Preset library',
+    alt: 'Presets tab with preset rows, key assignments and management controls',
+    description: 'Save and switch setups from the Presets tab or the collapsible sidebar.',
+    features: ['Load, save, create, rename and duplicate presets', 'Active-preset checkmark, unsaved-change prompts and recovery copies', 'Custom hotkeys work with the menu open or closed']
+  }
 };
-function setTab(tab) {const data = gallery[tab.dataset.tab];const caption=data.caption||`${data.label.toLowerCase()} — rendered interface preview`;$$('[data-tab]').forEach(b => {const active = b === tab;b.setAttribute('aria-selected',String(active));b.tabIndex = active ? 0 : -1;});$('#gallery-panel').setAttribute('aria-labelledby',tab.id);$('#gallery-screen').src = data.image;$('#gallery-screen').alt = caption;$('#gallery-screen').width=data.width||1004;$('#gallery-screen').height=data.height||784;$('#gallery-label').textContent = data.label;$('#gallery-title').innerHTML = data.title;$('#gallery-description').textContent = data.description;$('#gallery-features').replaceChildren(...data.features.map(text => {const li=document.createElement('li');li.textContent=text;return li;}));$('#gallery-zoom').dataset.image=data.image;$('#gallery-zoom').dataset.caption=caption;$('.gallery-footnote').textContent=data.footnote||'Settings shown are illustrative. Interface previews are rendered from the project, rather than live gameplay captures.';$('.image-tag').textContent=tab.dataset.tab==='gameplay'?'IN-GAME SCREENSHOT':'INTERFACE PREVIEW';}
+const galleryTabs = $$('.gallery-tabs [role="tab"]');
+const galleryScreen = $('#gallery-screen');
+const galleryZoom = $('#gallery-zoom');
+const galleryTitle = $('#gallery-title');
+const galleryDescription = $('#gallery-description');
+const galleryFeatures = $('#gallery-features');
+gallery.aim = {
+  title: galleryTitle.textContent,
+  alt: galleryScreen.alt,
+  description: galleryDescription.textContent,
+  features: [...galleryFeatures.children].map(item => item.textContent)
+};
+
+function setTab(tab) {
+  const key = tab.dataset.tab;
+  const data = gallery[key];
+  const image = `assets/release-5-1-2/${key}.webp`;
+  for (const button of galleryTabs) {
+    const active = button === tab;
+    button.setAttribute('aria-selected', String(active));
+    button.tabIndex = active ? 0 : -1;
+  }
+  $('#gallery-panel').setAttribute('aria-labelledby', tab.id);
+  galleryScreen.src = image;
+  galleryScreen.alt = data.alt;
+  galleryTitle.textContent = data.title;
+  galleryDescription.textContent = data.description;
+  galleryFeatures.replaceChildren(...data.features.map(feature => {
+    const item = document.createElement('li');
+    item.textContent = feature;
+    return item;
+  }));
+  galleryZoom.dataset.image = image;
+  galleryZoom.dataset.caption = `${tab.textContent} menu preview`;
+}
 let galleryTransition;
 function changeTab(tab) {
   if (tab.getAttribute('aria-selected') === 'true') return;
@@ -23,7 +84,20 @@ function changeTab(tab) {
     );
   }
 }
-$$('[data-tab]').forEach((tab,i,all) => {tab.addEventListener('click', () => changeTab(tab));tab.addEventListener('keydown',e=>{let next;if(e.key==='ArrowRight') next=(i+1)%all.length;if(e.key==='ArrowLeft') next=(i+all.length-1)%all.length;if(e.key==='Home') next=0;if(e.key==='End') next=all.length-1;if(next!==undefined){e.preventDefault();changeTab(all[next]);all[next].focus();}});});
+galleryTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => changeTab(tab));
+  tab.addEventListener('keydown', event => {
+    let next;
+    if (event.key === 'ArrowRight') next = (index + 1) % galleryTabs.length;
+    if (event.key === 'ArrowLeft') next = (index + galleryTabs.length - 1) % galleryTabs.length;
+    if (event.key === 'Home') next = 0;
+    if (event.key === 'End') next = galleryTabs.length - 1;
+    if (next === undefined) return;
+    event.preventDefault();
+    changeTab(galleryTabs[next]);
+    galleryTabs[next].focus();
+  });
+});
 const dialog=$('#image-dialog');let imageTrigger=null;
 $$('[data-image]').forEach(button=>button.addEventListener('click',()=>{imageTrigger=button;$('#lightbox-image').src=button.dataset.image;$('#lightbox-image').alt=button.dataset.caption;$('#image-caption').textContent=button.dataset.caption;dialog.showModal();}));
 $('#close-image').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});dialog.addEventListener('close',()=>imageTrigger?.focus());
@@ -36,7 +110,7 @@ function render(){const rows=$('#preset-rows');rows.replaceChildren(...names.map
 function endCapture(){clearTimeout(captureTimer);capturing=null;render();}
 function selectPreset(i){endCapture();selected=i;render();status(`${names[i]} selected. Website demo only.`);$('#preset-demo').focus({preventScroll:true});}
 function startCapture(i){clearTimeout(captureTimer);capturing=i;render();status(`Press one key or mouse button for ${names[i]}.`);$('#preset-demo').focus({preventScroll:true});captureTimer=setTimeout(()=>{endCapture();status('Capture timed out. Your previous binding is unchanged.');},15000);}
-function assign(code){if(code==='KeyB'){status('B is reserved for independent bot aim. Choose another key.');return;}if(binds.some((b,i)=>b===code&&i!==capturing)){status(`${label(code)} is already assigned. Choose another key.`);return;}const i=capturing;binds[i]=code;persist();endCapture();status(`${names[i]} bound to ${label(code)}. Saved in this browser.`);$('#preset-demo').focus({preventScroll:true});}
+function assign(code){if(code==='KeyB'){status('B is reserved for bot targeting. Choose another key.');return;}if(binds.some((b,i)=>b===code&&i!==capturing)){status(`${label(code)} is already assigned. Choose another key.`);return;}const i=capturing;binds[i]=code;persist();endCapture();status(`${names[i]} bound to ${label(code)}. Saved in this browser.`);$('#preset-demo').focus({preventScroll:true});}
 $('#preset-demo').addEventListener('keydown',e=>{if(e.repeat||e.code==='Tab')return;if(capturing!==null){if(e.ctrlKey||e.metaKey||e.altKey){status('Use a single key without a modifier chord.');return;}e.preventDefault();if(e.code)assign(e.code);}else if(e.target===$('#preset-demo')){const i=binds.indexOf(e.code);if(i!==-1){e.preventDefault();selectPreset(i);}}});
 $('#preset-demo').addEventListener('mousedown',e=>{if(capturing!==null&&!e.target.closest('button')){e.preventDefault();assign('Mouse'+e.button);}else if(capturing===null&&!e.target.closest('button')){const i=binds.indexOf('Mouse'+e.button);if(i!==-1){e.preventDefault();selectPreset(i);}}});
 $('#preset-demo').addEventListener('contextmenu',e=>{if(capturing!==null||binds.includes('Mouse2'))e.preventDefault();});

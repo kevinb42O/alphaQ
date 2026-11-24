@@ -1,6 +1,6 @@
 # AQx website
 
-Premium graphite-and-gold one-page website with custom artwork, the v4.1.2 loader, a feature gallery, a custom key-binding demo and Discord delivery.
+Premium graphite-and-gold one-page website with custom artwork, the v5.1.2 loader, a six-tab menu gallery and release notes, a custom key-binding demo and Discord delivery.
 
 ## Development
 
@@ -36,6 +36,6 @@ Prices live in `dist/index.html`; `dist/app.js` updates the selected purchase la
 
 Custom artwork uses black and champagne gold: a precision sculpture, macro keycaps and the AQx emblem rising behind obsidian mountains. Built-in imagegen prompts are recorded in `art-direction.json`. All artwork and fonts are self-hosted; font licenses are included.
 
-The v4.1.2 loader image is a rendered interface preview with updated AQx branding. The Gameplay tab uses a user-supplied in-game DMZ screenshot with updated branding. Other UI images are project-rendered layouts. The page makes no measured latency, hit-rate, detection or market-ranking claims.
+The lossless WebP files in `dist/assets/release-5-1-2/` come from two local build sources. The loader opening view and end of the update list come from `build/aqx-v5.1.2-20261124T193707Z/ui-fixture/renders/`. The six menu views come from `ui-preview/aqx-gameplay-lifecycle-20261124-r1/`, the direct parent of v5.1.2. The release notes summarise all 18 update groups in the packaged loader.
 
 This repository contains website source and public assets only. Application binaries, license keys and backend credentials are excluded.

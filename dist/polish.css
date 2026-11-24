@@ -54,42 +54,6 @@ h2 { font-size: clamp(3rem, 5.5vw, 5rem); }
 .pricing-heading h2 { font-size: clamp(3.5rem, 6vw, 5.5rem); }
 .faq h2 { font-size: clamp(3rem, 4.5vw, 4.5rem); }
 
-.streamproof {
-  border-block: 1px solid var(--line);
-  background: var(--surface);
-}
-
-.streamproof-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  align-items: start;
-  gap: clamp(2.5rem, 8vw, 8rem);
-}
-
-.streamproof h2 { margin-bottom: 1.5rem; }
-.streamproof-status { margin: 0; text-transform: uppercase; }
-.streamproof-copy { max-width: 35rem; }
-.streamproof-copy p { line-height: 1.8; }
-
-.streamproof-copy .streamproof-lead {
-  color: var(--text);
-  font-size: clamp(1.125rem, 2vw, 1.375rem);
-  line-height: 1.55;
-  text-wrap: pretty;
-}
-
-.streamproof-copy .text-link {
-  min-height: 44px;
-  color: var(--gold);
-  text-decoration: underline;
-  text-underline-offset: .3em;
-}
-
-.streamproof-copy .text-link:hover { color: var(--gold-bright); }
-
-@media (max-width: 700px) {
-  .streamproof-grid { grid-template-columns: 1fr; gap: 1.75rem; }
-}
 
 .hero h1 {
   font-size: clamp(4.75rem, 7.65vw, 6rem);
@@ -138,15 +102,6 @@ h2 { font-size: clamp(3rem, 5.5vw, 5rem); }
 .pricing-options button.selected .plan-select:after,
 .purchase-bar .eyebrow,
 .rail-content span:not(.rail-divider) { font-size: 11px; }
-
-/* The preview frame stays put when tabs swap screenshots with different crops. */
-.gallery-image .image-button { aspect-ratio: 1004 / 784; }
-.gallery-image .image-button img { height: 100%; object-fit: contain; }
-.gallery-copy { justify-content: flex-start; }
-
-@media (801px <= width <= 1100px) {
-  .gallery-panel { min-height: 620px; }
-}
 
 :root { scrollbar-color: #766447 #161616; }
 body { caret-color: var(--gold); }
@@ -319,4 +274,128 @@ body { caret-color: var(--gold); }
   .gallery-image img,
   .control-art img,
   .pricing-options button { transition-property: background, border-color, color; }
+}
+
+/* Release gallery and loader captures */
+.gallery-tabs {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0;
+}
+.gallery-tabs button {
+  min-height: 48px;
+  padding: 12px 6px;
+  text-align: center;
+}
+.gallery-tabs button:hover,
+.gallery-tabs button[aria-selected="true"] {
+  background: #cfb68312;
+}
+.gallery-panel {
+  grid-template-columns: minmax(0, 2.45fr) minmax(0, 1fr);
+  min-height: 0;
+}
+.gallery-image {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  margin: 0;
+  padding: clamp(12px, 2vw, 24px);
+}
+.gallery-image .image-button {
+  aspect-ratio: 1244 / 844;
+}
+.gallery-image img {
+  display: block;
+  height: 100%;
+  object-fit: contain;
+}
+.gallery-image .image-tag {
+  position: static;
+  font-size: .8125rem;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+.gallery-copy {
+  padding: clamp(20px, 2.5vw, 36px);
+}
+.gallery-copy > p:not(.gallery-footnote) {
+  font-size: 1rem;
+}
+.gallery-copy .check-list {
+  font-size: .9375rem;
+  margin-bottom: 0;
+}
+.release-captures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 3vw, 36px);
+  max-width: none;
+  padding: 0;
+}
+.release-captures figure {
+  min-width: 0;
+  margin: 0;
+}
+.release-captures figcaption {
+  margin-top: 14px;
+  font-size: .875rem;
+  color: var(--muted);
+}
+.release-notes {
+  width: min(100%, 870px);
+  margin: clamp(50px, 8vw, 104px) auto 0;
+}
+.release-notes h3 {
+  margin: 0 0 10px;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+}
+.release-notes-intro {
+  margin-bottom: 26px;
+  color: var(--muted);
+}
+.release-topics {
+  border-top: 1px solid var(--line);
+}
+.release-topics details {
+  border-bottom: 1px solid var(--line);
+}
+.release-topics summary {
+  cursor: pointer;
+  padding: 16px 6px;
+  font-weight: 700;
+}
+.release-topics summary::marker,
+.release-topics summary:hover {
+  color: var(--gold);
+}
+.release-topics dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 28px;
+  margin: 0;
+  padding: 6px 6px 26px;
+}
+.release-topics dt {
+  color: var(--gold);
+  font-weight: 700;
+}
+.release-topics dd {
+  margin: 5px 0 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+#image-dialog img {
+  max-width: 100%;
+  max-height: none;
+}
+@media (max-width: 900px) {
+  .gallery-panel { grid-template-columns: 1fr; }
+  .gallery-image { border-right: 0; border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 560px) {
+  .gallery-tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .gallery-tabs button { font-size: .875rem; }
+  .release-captures, .release-topics dl { grid-template-columns: 1fr; }
 }
