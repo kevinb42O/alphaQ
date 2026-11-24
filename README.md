@@ -28,7 +28,7 @@ Import the repository with its root as Root Directory. Framework: Other. Build c
 
 ## Access
 
-1 day €5.00 / 3 days €7.50 / 30 days €10.00. Keys and builds are delivered manually through [Discord](https://discord.gg/VzHWpB7uG). Online licensing uses Vercel and Supabase; the private management page is `/admin/`. Payment processing remains manual. See [online licensing operations](docs/online-licensing.md).
+1 day €5.00 / 3 days €7.50 / 7 days €10.00 / 30 days €15.00. Keys and builds are delivered manually through [Discord](https://discord.gg/VzHWpB7uG). Online licensing uses Vercel and Supabase; the private management page is `/admin/`. Payment processing remains manual. See [online licensing operations](docs/online-licensing.md).
 
 Prices live in `dist/index.html`; `dist/app.js` updates the selected purchase label.
 
