@@ -40,8 +40,8 @@
   <div class="hero-inner wrap"><div class="hero-text">
     <h1 id="hero-title"><span class="hero-line">Precision.</span> <em class="hero-line">On your terms.</em></h1>
     <p class="hero-description">Fine-tune your aim and widen your view in DMZ. When a quiet loot run turns into a squad fight, switch your entire setup with one key.</p>
-    <div class="hero-actions"><a class="button gold" href="#access">Choose your access <span class="button-price">from €5</span></a><a class="text-link" href="#loader"><span class="play-symbol" aria-hidden="true"></span>See what’s new</a></div>
-    <div class="hero-footnote"><span class="fine-rule"></span><span>Private keys delivered on Discord.<br>1-day, 3-day, 7-day, 30-day and lifetime access.</span></div>
+    <div class="hero-actions"><a class="button gold" href="#access">Choose your access <span class="button-price">from €5</span></a><a class="text-link" href="#loader">See what’s new</a></div>
+    <div class="hero-footnote"><span class="fine-rule"></span><span>Keys and builds delivered manually on Discord.</span></div>
   </div></div>
   <div class="hero-bottom wrap"><a href="#experience" class="scroll-cue"><span></span>EXPLORE THE INTERFACE</a></div>
 </section>
@@ -50,36 +50,50 @@
 <section class="experience section wrap" id="experience">
   <div class="section-heading"><h2>Explore the <em>interface.</em></h2><p>Every menu tab, from Aim and ESP to the preset library. Open any screenshot for a closer look.</p></div>
   <div class="gallery-tabs" role="tablist" aria-label="Menu previews">
-    <button id="tab-aim" type="button" role="tab" aria-selected="true" aria-controls="gallery-panel" data-tab="aim">Aim</button>
+    <button id="tab-presets" type="button" role="tab" aria-selected="true" aria-controls="gallery-panel" data-tab="presets">Presets</button>
+    <button id="tab-aim" type="button" role="tab" aria-selected="false" aria-controls="gallery-panel" tabindex="-1" data-tab="aim">Aim</button>
     <button id="tab-esp" type="button" role="tab" aria-selected="false" aria-controls="gallery-panel" tabindex="-1" data-tab="esp">ESP</button>
     <button id="tab-hud" type="button" role="tab" aria-selected="false" aria-controls="gallery-panel" tabindex="-1" data-tab="hud">HUD</button>
     <button id="tab-gameplay" type="button" role="tab" aria-selected="false" aria-controls="gallery-panel" tabindex="-1" data-tab="gameplay">Gameplay</button>
     <button id="tab-lobby" type="button" role="tab" aria-selected="false" aria-controls="gallery-panel" tabindex="-1" data-tab="lobby">Lobby</button>
-    <button id="tab-presets" type="button" role="tab" aria-selected="false" aria-controls="gallery-panel" tabindex="-1" data-tab="presets">Presets</button>
   </div>
-  <div id="gallery-panel" class="gallery-panel" role="tabpanel" aria-labelledby="tab-aim" tabindex="0">
+  <div id="gallery-panel" class="gallery-panel" role="tabpanel" aria-labelledby="tab-presets" tabindex="0">
     <figure class="gallery-image">
-      <button type="button" class="image-button" id="gallery-zoom" data-image="assets/release-5-1-2/aim.webp" data-caption="Aim menu preview" aria-label="Enlarge the selected menu preview"><img id="gallery-screen" src="assets/release-5-1-2/aim.webp" alt="Aim tab with targeting, smoothing, shot controls and the preset sidebar" width="1244" height="844" loading="lazy"></button>
+      <button type="button" class="image-button" id="gallery-zoom" data-image="assets/release-5-1-2/presets.webp" data-caption="Presets menu preview" aria-label="Enlarge the selected menu preview"><img id="gallery-screen" src="assets/release-5-1-2/presets.webp" alt="Presets tab with preset rows, key assignments and management controls" width="1244" height="844" loading="lazy"></button>
       <figcaption class="image-tag">Rendered preview from the v5.1.2 menu baseline</figcaption>
     </figure>
     <div class="gallery-copy">
-      <h3 id="gallery-title">Aim and target selection</h3>
-      <p id="gallery-description">Set your aim response and choose how targets are prioritised.</p>
-      <ul class="check-list" id="gallery-features"><li>Normal and silent aim, smoothing and sway compensation</li><li>Expanded target search and fresh shot checks</li><li>Moving-target prediction and shield-aware bone preference</li><li>Bot toggle respects master aim and your activation key</li></ul>
+      <h3 id="gallery-title">Preset library</h3>
+      <p id="gallery-description">Save and switch setups from the Presets tab or the collapsible sidebar.</p>
+      <ul class="check-list" id="gallery-features"><li>Load, save, create, rename and duplicate presets</li><li>Active-preset checkmark, unsaved-change prompts and recovery copies</li><li>Custom hotkeys work with the menu open or closed</li></ul>
+      <a id="gallery-demo-link" class="text-link" href="#controls">Try the preset demo</a>
     </div>
   </div>
 </section>
 
 <section class="loader-showcase section" id="loader"><div class="wrap">
   <div class="loader-heading">
-    <h2>What’s new in <em>v5.1.2.</em></h2>
-    <div class="loader-intro"><p>The updated AQx Loader brings the full release history into one scrolling panel and waits for the menu to report that it’s ready.</p></div>
+    <div>
+      <p class="release-date">Build <time datetime="2026-11-24">24 November 2026</time></p>
+      <h2>What’s new in <em>v5.1.2.</em></h2>
+    </div>
   </div>
-  <div class="loader-stage release-captures">
-    <figure><button type="button" class="image-button" data-image="assets/release-5-1-2/loader.webp" data-caption="AQx v5.1.2 loader, opening view" aria-label="Enlarge the v5.1.2 loader opening view"><img src="assets/release-5-1-2/loader.webp" width="1200" height="850" alt="AQx v5.1.2 loader with camera and spin changes at the top of the update list" loading="lazy"></button><figcaption>Loader opening view</figcaption></figure>
-    <figure><button type="button" class="image-button" data-image="assets/release-5-1-2/loader-updates.webp" data-caption="AQx v5.1.2 loader, end of the update list" aria-label="Enlarge the final loader updates"><img src="assets/release-5-1-2/loader-updates.webp" width="1200" height="850" alt="AQx v5.1.2 loader scrolled to the community and online activation updates" loading="lazy"></button><figcaption>End of the update list</figcaption></figure>
+  <div class="release-overview">
+    <figure class="loader-stage">
+      <button type="button" class="image-button" data-image="assets/release-5-1-2/loader.webp" data-caption="AQx v5.1.2 loader preview" aria-label="Enlarge the v5.1.2 loader preview"><img src="assets/release-5-1-2/loader.webp" width="1200" height="850" alt="AQx v5.1.2 loader with the release notes panel" loading="lazy"></button>
+      <figcaption>v5.1.2 loader preview</figcaption>
+    </figure>
+    <div class="release-highlights">
+      <h3>Release highlights</h3>
+      <ul class="check-list">
+        <li>Camera and spin updates for lobby transitions</li>
+        <li>Preset library with shortcut and recovery controls</li>
+        <li>Loader shows progress until the menu reports it’s ready</li>
+      </ul>
+      <a class="text-link" href="#release-notes">Read the full changelog</a>
+    </div>
   </div>
-  <div class="release-notes">
+  <div class="release-notes" id="release-notes">
     <h3>Release notes</h3>
     <p class="release-notes-intro">All 18 update groups from the v5.1.2 loader.</p>
     <div class="release-topics">
@@ -124,27 +138,44 @@
     </div>
   </div>
 </div></section>
-<section class="controls-section" id="controls"><div class="wrap controls-grid"><div class="controls-copy"><h2>Bind it.<br><em>Switch it.</em></h2><p>Save a preset. Give it a key. Switch with the menu open or closed. Your binds stay with your presets, ready for the next session.</p><ul class="editorial-list"><li><strong>Keyboard or mouse.</strong><span>Assign a single key or a physical mouse button. Clear and reassign whenever you need.</span></li><li><strong>Built around your flow.</strong><span>Preset activation pauses while typing, interacting with widgets or capturing a new bind.</span></li><li><strong>See what’s loaded.</strong><span>A checkmark identifies the loaded preset. The library flags unsaved edits before you switch.</span></li></ul><div class="default-binds"><span><kbd>Home</kbd> Open / close menu</span><span><kbd>T</kbd> Pause / resume anti-aim</span><span><kbd>B</kbd> Toggle bot aim</span></div><figure class="control-art"><img src="assets/keycraft.webp" alt="" width="1536" height="1024" loading="lazy"></figure></div>
-  <figure class="preset-preview">
-    <button type="button" class="image-button" data-image="assets/release-5-1-2/presets.webp" data-caption="Preset library menu preview" aria-label="Enlarge the preset library preview"><img src="assets/release-5-1-2/presets.webp" alt="Preset library with shortcut bindings and save, rename and duplicate controls" width="1244" height="844" loading="lazy"></button>
-    <figcaption>Preset library preview</figcaption>
-  </figure>
+<section class="controls-section" id="controls"><div class="wrap controls-grid">
+  <div class="controls-copy">
+    <h2>Switch with <em>one key.</em></h2>
+    <p>Try switching between two example presets. Each has its own shortcut and the library marks which one is active.</p>
+  </div>
+  <fieldset class="preset-demo" id="preset-demo" hidden>
+    <legend>Preset demo</legend>
+    <p class="preset-demo-status" aria-live="polite">Active preset <strong id="demo-preset">Exploration</strong></p>
+    <button type="button" data-preset="Exploration" data-key="1" aria-pressed="true"><span>Exploration</span><kbd>1</kbd></button>
+    <button type="button" data-preset="Team play" data-key="2" aria-pressed="false"><span>Team play</span><kbd>2</kbd></button>
+    <p class="preset-demo-help">Select a preset or press its key while focused here.</p>
+  </fieldset>
+  <noscript><p>In the app, select a preset or press its assigned shortcut to switch.</p></noscript>
 </div></section>
 
-<section class="philosophy section"><img class="landscape-art" src="assets/precision-sculpture.webp" alt="" width="1536" height="1024" loading="lazy"><div class="landscape-shade"></div><div class="wrap philosophy-content"><h2>Your setup.<br><em>Your call.</em></h2><p class="philosophy-lead">Fine-tuned targeting. Your preferred response.<br>A shortcut for the way you play.</p><a class="text-link" href="#access">Build your next setup</a></div><span class="art-caption">AQx / OBSIDIAN SERIES</span></section>
+<div class="philosophy art-transition" aria-hidden="true"><img class="landscape-art" src="assets/precision-sculpture.webp" alt="" width="1536" height="1024" loading="lazy"></div>
 
-<section class="access-section" id="access"><div class="wrap">
-  <div class="pricing-heading"><h2>Choose your<br><em>access.</em></h2><p>Choose your time. Get your key on Discord.<br>The full AQx feature set, on every plan.</p></div>
-  <div class="duration-picker pricing-options" role="group" aria-label="Access duration">
-    <button data-days="1" data-price="5" aria-pressed="false"><span class="plan-kicker">GET A FEEL FOR IT</span><span class="plan-duration">1 day</span><strong class="plan-price">€5<span>.00</span></strong><span class="plan-billing">One-time payment</span><span class="plan-rule"></span><span class="plan-feature">Full feature access</span><span class="plan-feature">24 hours from activation</span><span class="plan-feature">Key &amp; build via Discord</span><span class="plan-select">Select 1 day</span></button>
-    <button data-days="3" data-price="7.50" aria-pressed="false"><span class="plan-kicker">MAKE A WEEKEND OF IT</span><span class="plan-duration">3 days</span><strong class="plan-price">€7<span>.50</span></strong><span class="plan-billing">One-time payment</span><span class="plan-rule"></span><span class="plan-feature">Full feature access</span><span class="plan-feature">3 days from activation</span><span class="plan-feature">Key &amp; build via Discord</span><span class="plan-select">Select 3 days</span></button>
-    <button data-days="7" data-price="10" aria-pressed="false"><span class="plan-kicker">A FULL WEEK</span><span class="plan-duration">7 days</span><strong class="plan-price">€10<span>.00</span></strong><span class="plan-billing">One-time payment</span><span class="plan-rule"></span><span class="plan-feature">Full feature access</span><span class="plan-feature">7 days from activation</span><span class="plan-feature">Key &amp; build via Discord</span><span class="plan-select">Select 7 days</span></button>
-    <button data-days="30" data-price="15" aria-pressed="true" class="selected"><span class="plan-kicker">SETTLE INTO YOUR SETUP</span><span class="plan-duration">30 days</span><strong class="plan-price">€15<span>.00</span></strong><span class="plan-billing">One-time payment</span><span class="plan-rule"></span><span class="plan-feature">Full feature access</span><span class="plan-feature">30 days from activation</span><span class="plan-feature">Key &amp; build via Discord</span><span class="plan-select">Select 30 days</span></button>
-    <button data-days="0" data-price="65" aria-pressed="false"><span class="plan-kicker">NO EXPIRY</span><span class="plan-duration">Lifetime</span><strong class="plan-price">€65<span>.00</span></strong><span class="plan-billing">One-time payment</span><span class="plan-rule"></span><span class="plan-feature">Full feature access</span><span class="plan-feature">No expiry after activation</span><span class="plan-feature">Key &amp; build via Discord</span><span class="plan-select">Select Lifetime</span></button>
-  </div><div class="purchase-bar"><div><span class="eyebrow">YOUR SELECTION</span><span id="duration-summary" aria-live="polite">30-day access · €15.00</span></div><a id="access-link" class="button gold" href="https://discord.gg/VzHWpB7uG" target="_blank" rel="noopener noreferrer">Get 30 days — €15.00</a></div><p class="access-note">Keys and the latest build are delivered through Discord. All purchases are handled by the team.</p>
+<section class="access-section" id="access"><div class="wrap access-layout">
+  <div class="pricing-heading">
+    <h2>Choose your <em>access.</em></h2>
+    <p>Every duration includes the same features. Keys and builds are delivered manually on Discord.</p>
+    <p class="compatibility-note"><strong>Windows compatibility</strong><br>AQx v5.1.2 does not work on Windows 11 version 25H2 or later.</p>
+    <p>Timed access starts on first activation. A lifetime key has no expiry.</p>
+  </div>
+  <div class="access-picker">
+    <div class="access-plans" role="group" aria-label="Access duration">
+      <button type="button" data-days="1" data-price="5" aria-pressed="false"><span>1 day</span><strong>€5.00</strong></button>
+      <button type="button" data-days="3" data-price="7.50" aria-pressed="false"><span>3 days</span><strong>€7.50</strong></button>
+      <button type="button" data-days="7" data-price="10" aria-pressed="false"><span>7 days</span><strong>€10.00</strong></button>
+      <button type="button" data-days="30" data-price="15" aria-pressed="true"><span>30 days</span><strong>€15.00</strong></button>
+      <button type="button" data-days="0" data-price="65" aria-pressed="false"><span>Lifetime</span><strong>€65.00</strong></button>
+    </div>
+    <p id="duration-summary" aria-live="polite">30-day access · €15.00</p>
+    <a id="access-link" class="button gold" href="https://discord.gg/VzHWpB7uG" target="_blank" rel="noopener noreferrer">Continue on Discord</a>
+  </div>
 </div></section>
 
-<section class="faq section wrap" id="faq"><div><h2>Before<br><em>you start.</em></h2></div><div class="faq-list"><p><strong>Windows compatibility.</strong> AQx v5.1.2 does not work on Windows 11 version 25H2 or later.</p><details><summary>How do I get my key and build?<span aria-hidden="true">+</span></summary><p>Join the Discord and ask the team about your chosen duration. Your key and build are delivered manually through Discord. This page does not process payments or issue licenses.</p></details><details><summary>When does my access period begin?<span aria-hidden="true">+</span></summary><p>Timed keys start counting on first activation and last 24 hours, 3 days, 7 days or 30 days. Lifetime keys have no expiry. Ask the team which build and activation requirements apply before purchasing.</p></details><details><summary>Can I switch presets with the menu closed?<span aria-hidden="true">+</span></summary><p>Yes. Preset hotkeys work with the menu open or closed. Activation pauses during text entry, widget interactions and key capture. Release held keys after these interactions before switching again.</p></details><details><summary>What can I use for a custom bind?<span aria-hidden="true">+</span></summary><p>A single keyboard key or one of the five physical mouse buttons. Preset bindings are saved between sessions. Multi-key chords and mouse wheel movements are not supported by the preset binding system. Existing feature shortcuts retain their actions.</p></details><details><summary>Where do these screenshots come from?<span aria-hidden="true">+</span></summary><p>The loader views come from the v5.1.2 UI fixture. The six menu views are rendered previews from the gameplay lifecycle build that v5.1.2 is based on.</p></details></div></section>
+<section class="faq section wrap" id="faq"><div><h2>Before<br><em>you start.</em></h2></div><div class="faq-list"><details><summary>How do I get my key and build?<span aria-hidden="true">+</span></summary><p>Join the Discord and ask the team about your chosen duration. Your key and build are delivered manually through Discord. This page does not process payments or issue licenses.</p></details><details><summary>When does my access period begin?<span aria-hidden="true">+</span></summary><p>Timed keys start counting on first activation and last 24 hours, 3 days, 7 days or 30 days. Lifetime keys have no expiry. Ask the team which build and activation requirements apply before purchasing.</p></details><details><summary>Can I switch presets with the menu closed?<span aria-hidden="true">+</span></summary><p>Yes. Preset hotkeys work with the menu open or closed. Activation pauses during text entry, widget interactions and key capture. Release held keys after these interactions before switching again.</p></details><details><summary>What can I use for a custom bind?<span aria-hidden="true">+</span></summary><p>A single keyboard key or one of the five physical mouse buttons. Preset bindings are saved between sessions. Multi-key chords and mouse wheel movements are not supported by the preset binding system. Existing feature shortcuts retain their actions.</p></details><details><summary>Where do these screenshots come from?<span aria-hidden="true">+</span></summary><p>The loader preview comes from the v5.1.2 UI fixture. The six menu views are rendered previews from the gameplay lifecycle build that v5.1.2 is based on.</p></details></div></section>
 <section class="closing wrap"><div class="closing-brand">AQx</div><a class="button outline" href="https://discord.gg/VzHWpB7uG" target="_blank" rel="noopener noreferrer">Join the Discord</a></section>
 </main>
 <footer class="wrap footer"><span>© <span id="year">2026</span> AQx. Precision, on your terms.</span><div><a href="#experience">Interface</a><a href="#faq">Questions</a><a href="#">Back to top</a></div><p>Independent project. Not affiliated with or endorsed by the game’s publishers.</p></footer>

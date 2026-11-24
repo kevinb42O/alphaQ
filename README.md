@@ -30,12 +30,12 @@ Import the repository with its root as Root Directory. Framework: Other. Build c
 
 1 day €5.00 / 3 days €7.50 / 7 days €10.00 / 30 days €15.00 / lifetime €65.00. Keys and builds are delivered manually through [Discord](https://discord.gg/VzHWpB7uG). Online licensing uses Vercel and Supabase; the private management page is `/admin/`. Payment processing remains manual. See [online licensing operations](docs/online-licensing.md).
 
-Prices live in `dist/index.html`; `dist/app.js` updates the selected purchase label.
+Prices live in `dist/index.html`. `dist/app.js` updates the selected duration and price.
 
 ## Assets
 
 Custom artwork uses black and champagne gold: a precision sculpture, macro keycaps and the AQx emblem rising behind obsidian mountains. Built-in imagegen prompts are recorded in `art-direction.json`. All artwork and fonts are self-hosted; font licenses are included.
 
-The lossless WebP files in `dist/assets/release-5-1-2/` come from two local build sources. The loader opening view and end of the update list come from `build/aqx-v5.1.2-20261124T193707Z/ui-fixture/renders/`. The six menu views come from `ui-preview/aqx-gameplay-lifecycle-20261124-r1/`, the direct parent of v5.1.2. The release notes summarise all 18 update groups in the packaged loader.
+The lossless WebP files in `dist/assets/release-5-1-2/` come from two local build sources. What’s new displays the loader opening view from `build/aqx-v5.1.2-20261124T193707Z/ui-fixture/renders/`. The six menu views come from `ui-preview/aqx-gameplay-lifecycle-20261124-r1/`, the direct parent of v5.1.2. The release notes summarise all 18 update groups in the packaged loader.
 
 This repository contains website source and public assets only. Application binaries, license keys and backend credentials are excluded.

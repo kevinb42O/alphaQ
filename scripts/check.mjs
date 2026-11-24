@@ -13,8 +13,11 @@ assert(discord.length>=3&&discord.every(r=>r==='https://discord.gg/VzHWpB7uG'),'
 const plans=[...html.matchAll(/data-days="(\d+)" data-price="([\d.]+)"/g)].map(match=>match.slice(1));
 assert.deepEqual(plans,[['1','5'],['3','7.50'],['7','10'],['30','15'],['0','65']],'Pricing mismatch');
 assert(html.includes('obsidian-logo-landscape.webp')&&html.includes('release-5-1-2/loader.webp'),'Missing latest artwork/loader');
+const loaderSection=html.match(/<section\b[^>]*\bid="loader"[\s\S]*?<\/section>/)?.[0]??'';
+assert.deepEqual([...loaderSection.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g)].map(match=>match[1]),
+  ['assets/release-5-1-2/loader.webp'],'What’s new must show exactly one loader image');
 const menuTabs=[...html.matchAll(/data-tab="([a-z]+)"/g)].map(match=>match[1]);
-assert.deepEqual(menuTabs,['aim','esp','hud','gameplay','lobby','presets'],'Missing or out-of-order menu tabs');
+assert.deepEqual(menuTabs,['presets','aim','esp','hud','gameplay','lobby'],'Missing or out-of-order menu tabs');
 for(const tab of menuTabs)await access(path.join(dist,'assets','release-5-1-2',tab+'.webp'));
 async function scan(dir){for(const entry of await readdir(dir,{withFileTypes:true})){const file=path.join(dir,entry.name);if(entry.isDirectory())await scan(file);else{assert(!/\.(exe|dll|env|csv)$/i.test(entry.name),'Private or executable file in public assets');if(/\.(html|js|css)$/i.test(entry.name)){const s=await readFile(file,'utf8');assert(!/ALQ1-[A-F0-9]{4}-/.test(s),'License key in public source');}}}}
 await scan(dist);

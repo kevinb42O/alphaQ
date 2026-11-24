@@ -326,18 +326,18 @@ body { caret-color: var(--gold); }
   font-size: .9375rem;
   margin-bottom: 0;
 }
-.release-captures {
+.release-overview {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(16px, 3vw, 36px);
-  max-width: none;
-  padding: 0;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 72px);
 }
-.release-captures figure {
+.release-overview .loader-stage {
   min-width: 0;
   margin: 0;
+  padding: 0;
 }
-.release-captures figcaption {
+.release-overview figcaption {
   margin-top: 14px;
   font-size: .875rem;
   color: var(--muted);
@@ -397,14 +397,83 @@ body { caret-color: var(--gold); }
 @media (max-width: 560px) {
   .gallery-tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .gallery-tabs button { font-size: .875rem; }
-  .release-captures, .release-topics dl { grid-template-columns: 1fr; }
+  .release-overview, .release-topics dl { grid-template-columns: 1fr; }
 }
 
-.preset-preview { margin: 0; }
-.preset-preview img { display: block; width: 100%; border: 1px solid var(--line); }
-.preset-preview figcaption { margin-top: 14px; color: var(--muted); font-size: .875rem; }
+#gallery-demo-link { display: inline-block; margin-top: 20px; }
+#gallery-demo-link[hidden] { display: none; }
 
-@media (600px < width <= 1100px) {
-  .duration-picker.pricing-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .pricing-options button[data-days="0"] { grid-column: 1 / -1; }
+.release-date { margin: 0 0 12px; color: var(--gold); font-size: .875rem; }
+.release-highlights h3 { margin: 0 0 16px; font-size: 1.5rem; }
+.release-highlights .check-list { display: block; }
+.release-highlights .text-link { display: inline-block; margin-top: 12px; }
+
+.controls-section { padding-block: clamp(48px, 8vw, 96px); }
+.controls-grid { align-items: center; }
+.preset-demo {
+  min-width: 0;
+  margin: 0;
+  padding: clamp(16px, 3vw, 28px);
+  border: 1px solid var(--line);
+  background: #171717;
+}
+.preset-demo legend { padding-inline: 8px; color: var(--gold); font-weight: 700; }
+.preset-demo-status { margin: 0 0 16px; color: var(--muted); }
+.preset-demo-status strong { margin-left: 5px; color: #f6e2b8; }
+.preset-demo-help { margin: 16px 0 0; color: var(--muted); font-size: .875rem; }
+
+.philosophy.art-transition { min-height: 0; height: clamp(110px, 20vw, 240px); }
+.art-transition .landscape-art { object-position: center 58%; }
+
+.access-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(24px, 7vw, 100px);
+  max-width: 1070px;
+}
+.access-layout .pricing-heading { margin: 0; text-align: left; }
+.access-layout .pricing-heading h2 { margin: 0 0 18px; }
+.access-layout .pricing-heading p { margin: 0 0 14px; font-size: .9375rem; line-height: 1.55; }
+.access-layout .pricing-heading p:last-child { margin-bottom: 0; }
+.compatibility-note { padding-left: 12px; border-left: 2px solid var(--gold); }
+.compatibility-note strong { color: #f6e2b8; }
+.access-plans { display: grid; gap: 6px; }
+.access-plans button,
+.preset-demo button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 44px;
+  padding: 9px 14px;
+  gap: 12px;
+  border: 1px solid var(--line);
+  background: #181818;
+  text-align: left;
+}
+.preset-demo button + button { margin-top: 6px; }
+.access-plans button strong { font-variant-numeric: tabular-nums; }
+.access-plans button[aria-pressed="true"],
+.preset-demo button[aria-pressed="true"] {
+  border-color: #cbb279;
+  background: #28231b;
+  color: #f6e2b8;
+}
+.access-plans button:hover,
+.preset-demo button:hover { border-color: #e3c58e; }
+.access-picker #duration-summary { margin: 12px 0; color: var(--muted); font-size: .875rem; }
+.access-picker .button { width: 100%; min-height: 48px; padding-block: 12px; }
+
+@media (max-width: 700px) {
+  .access-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  html { scroll-padding-top: 82px; }
+  .hero.hero-premium { min-height: 0; padding-block: 115px 103px; }
+  .experience.section { padding-top: 45px; }
+  .experience .section-heading { margin-bottom: 20px; }
+  .access-section { padding-block: 40px; }
+  .access-layout { gap: 20px; }
+  .access-layout .pricing-heading h2 { font-size: clamp(2rem, 9vw, 3rem); margin-bottom: 12px; }
 }

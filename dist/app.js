@@ -5,6 +5,12 @@ $('.header').classList.add('menu-ready');
 menu.addEventListener('click', () => {const open = menu.getAttribute('aria-expanded') !== 'true';menu.setAttribute('aria-expanded', String(open));menu.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');$('#navigation').classList.toggle('open', open);});
 $$('#navigation a').forEach(a => a.addEventListener('click', () => {menu.setAttribute('aria-expanded', 'false');menu.setAttribute('aria-label','Open navigation');$('#navigation').classList.remove('open');}));
 const gallery = {
+  aim: {
+    title: 'Aim and target selection',
+    alt: 'Aim tab with targeting, smoothing, shot controls and the preset sidebar',
+    description: 'Set your aim response and choose how targets are prioritised.',
+    features: ['Normal and silent aim, smoothing and sway compensation', 'Expanded target search and fresh shot checks', 'Moving-target prediction and shield-aware bone preference', 'Bot toggle respects master aim and your activation key']
+  },
   esp: {
     title: 'ESP range and colours',
     alt: 'ESP tab with range controls, category buttons and visibility colours',
@@ -28,12 +34,6 @@ const gallery = {
     alt: 'Lobby tab with example player rows and the preset sidebar',
     description: 'See the Lobby tab’s player table and keep your presets within reach.',
     features: ['Player table in a dedicated tab', 'Collapsible preset sidebar', 'Camera and spin changes for lobby transitions in v5.1.2']
-  },
-  presets: {
-    title: 'Preset library',
-    alt: 'Presets tab with preset rows, key assignments and management controls',
-    description: 'Save and switch setups from the Presets tab or the collapsible sidebar.',
-    features: ['Load, save, create, rename and duplicate presets', 'Active-preset checkmark, unsaved-change prompts and recovery copies', 'Custom hotkeys work with the menu open or closed']
   }
 };
 const galleryTabs = $$('.gallery-tabs [role="tab"]');
@@ -42,7 +42,7 @@ const galleryZoom = $('#gallery-zoom');
 const galleryTitle = $('#gallery-title');
 const galleryDescription = $('#gallery-description');
 const galleryFeatures = $('#gallery-features');
-gallery.aim = {
+gallery.presets = {
   title: galleryTitle.textContent,
   alt: galleryScreen.alt,
   description: galleryDescription.textContent,
@@ -70,6 +70,7 @@ function setTab(tab) {
   }));
   galleryZoom.dataset.image = image;
   galleryZoom.dataset.caption = `${tab.textContent} menu preview`;
+  $('#gallery-demo-link').hidden = key !== 'presets';
 }
 let galleryTransition;
 function changeTab(tab) {
@@ -109,15 +110,28 @@ for (const plan of accessPlans) {
     const lifetime = days === '0';
     for (const option of accessPlans) {
       const selected = option === plan;
-      option.classList.toggle('selected', selected);
       option.setAttribute('aria-pressed', String(selected));
     }
     const summary = lifetime ? 'Lifetime access' : `${days}-day access`;
-    const duration = lifetime ? 'lifetime access' : `${days} ${days === '1' ? 'day' : 'days'}`;
     $('#duration-summary').textContent = `${summary} · €${price}`;
-    $('#access-link').textContent = `Get ${duration} — €${price}`;
   });
 }
+const presetDemo = $('#preset-demo');
+const demoPresets = $$('[data-preset]', presetDemo);
+function selectDemoPreset(preset) {
+  for (const option of demoPresets) option.setAttribute('aria-pressed', String(option === preset));
+  $('#demo-preset').textContent = preset.dataset.preset;
+}
+for (const preset of demoPresets) preset.addEventListener('click', () => selectDemoPreset(preset));
+presetDemo.addEventListener('keydown', event => {
+  if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+  const preset = demoPresets.find(option => option.dataset.key === event.key);
+  if (!preset) return;
+  event.preventDefault();
+  selectDemoPreset(preset);
+  preset.focus();
+});
+presetDemo.hidden = false;
 $('#year').textContent=new Date().getFullYear();
 
 // Move keyboard focus with same-page navigation so a previously focused control
