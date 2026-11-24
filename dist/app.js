@@ -70,7 +70,6 @@ function setTab(tab) {
   }));
   galleryZoom.dataset.image = image;
   galleryZoom.dataset.caption = `${tab.textContent} menu preview`;
-  $('#gallery-demo-link').hidden = key !== 'presets';
 }
 let galleryTransition;
 function changeTab(tab) {
@@ -116,22 +115,6 @@ for (const plan of accessPlans) {
     $('#duration-summary').textContent = `${summary} · €${price}`;
   });
 }
-const presetDemo = $('#preset-demo');
-const demoPresets = $$('[data-preset]', presetDemo);
-function selectDemoPreset(preset) {
-  for (const option of demoPresets) option.setAttribute('aria-pressed', String(option === preset));
-  $('#demo-preset').textContent = preset.dataset.preset;
-}
-for (const preset of demoPresets) preset.addEventListener('click', () => selectDemoPreset(preset));
-presetDemo.addEventListener('keydown', event => {
-  if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
-  const preset = demoPresets.find(option => option.dataset.key === event.key);
-  if (!preset) return;
-  event.preventDefault();
-  selectDemoPreset(preset);
-  preset.focus();
-});
-presetDemo.hidden = false;
 $('#year').textContent=new Date().getFullYear();
 
 // Move keyboard focus with same-page navigation so a previously focused control

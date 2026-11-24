@@ -400,27 +400,10 @@ body { caret-color: var(--gold); }
   .release-overview, .release-topics dl { grid-template-columns: 1fr; }
 }
 
-#gallery-demo-link { display: inline-block; margin-top: 20px; }
-#gallery-demo-link[hidden] { display: none; }
-
 .release-date { margin: 0 0 12px; color: var(--gold); font-size: .875rem; }
 .release-highlights h3 { margin: 0 0 16px; font-size: 1.5rem; }
 .release-highlights .check-list { display: block; }
 .release-highlights .text-link { display: inline-block; margin-top: 12px; }
-
-.controls-section { padding-block: clamp(48px, 8vw, 96px); }
-.controls-grid { align-items: center; }
-.preset-demo {
-  min-width: 0;
-  margin: 0;
-  padding: clamp(16px, 3vw, 28px);
-  border: 1px solid var(--line);
-  background: #171717;
-}
-.preset-demo legend { padding-inline: 8px; color: var(--gold); font-weight: 700; }
-.preset-demo-status { margin: 0 0 16px; color: var(--muted); }
-.preset-demo-status strong { margin-left: 5px; color: #f6e2b8; }
-.preset-demo-help { margin: 16px 0 0; color: var(--muted); font-size: .875rem; }
 
 .philosophy.art-transition { min-height: 0; height: clamp(110px, 20vw, 240px); }
 .art-transition .landscape-art { object-position: center 58%; }
@@ -439,8 +422,7 @@ body { caret-color: var(--gold); }
 .compatibility-note { padding-left: 12px; border-left: 2px solid var(--gold); }
 .compatibility-note strong { color: #f6e2b8; }
 .access-plans { display: grid; gap: 6px; }
-.access-plans button,
-.preset-demo button {
+.access-plans button {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -452,16 +434,13 @@ body { caret-color: var(--gold); }
   background: #181818;
   text-align: left;
 }
-.preset-demo button + button { margin-top: 6px; }
 .access-plans button strong { font-variant-numeric: tabular-nums; }
-.access-plans button[aria-pressed="true"],
-.preset-demo button[aria-pressed="true"] {
+.access-plans button[aria-pressed="true"] {
   border-color: #cbb279;
   background: #28231b;
   color: #f6e2b8;
 }
-.access-plans button:hover,
-.preset-demo button:hover { border-color: #e3c58e; }
+.access-plans button:hover { border-color: #e3c58e; }
 .access-picker #duration-summary { margin: 12px 0; color: var(--muted); font-size: .875rem; }
 .access-picker .button { width: 100%; min-height: 48px; padding-block: 12px; }
 
