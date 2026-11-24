@@ -5,12 +5,6 @@ $('.header').classList.add('menu-ready');
 menu.addEventListener('click', () => {const open = menu.getAttribute('aria-expanded') !== 'true';menu.setAttribute('aria-expanded', String(open));menu.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');$('#navigation').classList.toggle('open', open);});
 $$('#navigation a').forEach(a => a.addEventListener('click', () => {menu.setAttribute('aria-expanded', 'false');menu.setAttribute('aria-label','Open navigation');$('#navigation').classList.remove('open');}));
 const gallery = {
-  aim: {
-    title: 'Aim and target selection',
-    alt: 'Aim tab with targeting, smoothing, shot controls and the preset sidebar',
-    description: 'Set your aim response and choose how targets are prioritised.',
-    features: ['Normal and silent aim, smoothing and sway compensation', 'Expanded target search and fresh shot checks', 'Moving-target prediction and shield-aware bone preference', 'Bot toggle respects master aim and your activation key']
-  },
   esp: {
     title: 'ESP range and colours',
     alt: 'ESP tab with range controls, category buttons and visibility colours',
@@ -34,6 +28,12 @@ const gallery = {
     alt: 'Lobby tab with example player rows and the preset sidebar',
     description: 'See the Lobby tab’s player table and keep your presets within reach.',
     features: ['Player table in a dedicated tab', 'Collapsible preset sidebar', 'Camera and spin changes for lobby transitions in v5.1.2']
+  },
+  presets: {
+    title: 'Preset library',
+    alt: 'Presets tab with preset rows, key assignments and management controls',
+    description: 'Save and switch setups from the Presets tab or the collapsible sidebar.',
+    features: ['Load, save, create, rename and duplicate presets', 'Active-preset checkmark, unsaved-change prompts and recovery copies', 'Custom hotkeys work with the menu open or closed']
   }
 };
 const galleryTabs = $$('.gallery-tabs [role="tab"]');
@@ -42,7 +42,7 @@ const galleryZoom = $('#gallery-zoom');
 const galleryTitle = $('#gallery-title');
 const galleryDescription = $('#gallery-description');
 const galleryFeatures = $('#gallery-features');
-gallery.presets = {
+gallery.aim = {
   title: galleryTitle.textContent,
   alt: galleryScreen.alt,
   description: galleryDescription.textContent,
