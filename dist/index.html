@@ -3,28 +3,29 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0c0d0c">
-  <title>AQx — Precision, on your terms.</title>
-  <meta name="description" content="Explore AQx v5.1.2, including six menu previews, the updated loader, wider camera controls, ESP colours and the preset library.">
+  <title>AQx — Crash out. Keep your loot.</title>
+  <meta name="description" content="Your session. Your exit. Discover Gold Session Control for AQx: a manual crash button to preserve your DMZ loot, with an optional custom keyboard shortcut.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aqxmenu.vercel.app/">
-  <meta property="og:title" content="AQx — Precision, on your terms.">
-  <meta property="og:description" content="Explore all six AQx menu tabs and see what changed in v5.1.2.">
-  <meta property="og:image" content="https://aqxmenu.vercel.app/assets/aqx-social-card.jpg">
+  <meta property="og:title" content="AQx — Crash out. Keep your loot.">
+  <meta property="og:description" content="That loot is worth keeping. Meet Gold Session Control: choose your exit with the gold crash button or your own keyboard shortcut.">
+  <meta property="og:image" content="https://aqxmenu.vercel.app/assets/session-control/social-card.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="AQx. Precision, on your terms. Ivory lettering beside a graphite and gold aperture.">
+  <meta property="og:image:alt" content="AQx. Crash out. Keep your loot. Gameplay preview showing the gold crash button and preset sidebar.">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="preload" href="assets/fonts/barlow-condensed-extrabold.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="assets/fonts/manrope-regular.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="assets/obsidian-logo-landscape.webp" as="image"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="polish.css">
   <script src="app.js" defer></script>
   <script src="motion.js" defer></script>
+  <link rel="stylesheet" href="session-control.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="reading-progress" aria-hidden="true"></div><header class="header"><div class="nav-wrap">
   <a class="brand" href="#" aria-label="AQx home"><svg viewBox="0 0 40 36" aria-hidden="true"><path d="M20 1 1 34h10L25 10zM26 15l-5 8 7 11h11zM18 27l-4 7h13l-4-7z" fill="currentColor"/></svg><span>AQx</span></a>
   <button class="menu-toggle" aria-controls="navigation" aria-expanded="false" aria-label="Open navigation"><span></span><span></span></button>
-  <nav id="navigation" aria-label="Main navigation"><a href="#experience">Interface</a><a href="#loader">What’s new</a><a href="#access">Get access</a><a class="nav-discord" href="https://discord.gg/VzHWpB7uG" target="_blank" rel="noopener noreferrer">Join Discord <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5a17 17 0 0 0-4-1l-.5 1a16 16 0 0 0-5 0L9 4a17 17 0 0 0-4 1C2.5 9 2 13 2.5 17c2 1.5 4 2 5 2l1-2-1.5-.7.5-.3a14 14 0 0 0 9 0l.5.3L15.5 17l1 2c1 0 3-.5 5-2 .5-4 0-8-2.5-12ZM8.5 14c-1 0-1.5-1-1.5-2s.5-2 1.5-2 1.5 1 1.5 2-.5 2-1.5 2Zm7 0c-1 0-1.5-1-1.5-2s.5-2 1.5-2 1.5 1 1.5 2-.5 2-1.5 2Z" fill="currentColor"/></svg></a></nav>
+  <nav id="navigation" aria-label="Main navigation"><a href="#session-control">Session Control</a><a href="#experience">Interface</a><a href="#loader">What’s new</a><a href="#access">Get access</a><a class="nav-discord" href="https://discord.gg/VzHWpB7uG" target="_blank" rel="noopener noreferrer">Join Discord <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5a17 17 0 0 0-4-1l-.5 1a16 16 0 0 0-5 0L9 4a17 17 0 0 0-4 1C2.5 9 2 13 2.5 17c2 1.5 4 2 5 2l1-2-1.5-.7.5-.3a14 14 0 0 0 9 0l.5.3L15.5 17l1 2c1 0 3-.5 5-2 .5-4 0-8-2.5-12ZM8.5 14c-1 0-1.5-1-1.5-2s.5-2 1.5-2 1.5 1 1.5 2-.5 2-1.5 2Zm7 0c-1 0-1.5-1-1.5-2s.5-2 1.5-2 1.5 1 1.5 2-.5 2-1.5 2Z" fill="currentColor"/></svg></a></nav>
 </div></header>
 <main id="main">
 <section class="hero hero-premium" aria-labelledby="hero-title">
@@ -38,14 +39,33 @@
     </svg>
   </div>
   <div class="hero-inner wrap"><div class="hero-text">
-    <h1 id="hero-title"><span class="hero-line">Precision.</span> <em class="hero-line">On your terms.</em></h1>
-    <p class="hero-description">Fine-tune your aim and widen your view in DMZ. When a quiet loot run turns into a squad fight, switch your entire setup with one key.</p>
-    <div class="hero-actions"><a class="button gold" href="#access">Choose your access <span class="button-price">from €5</span></a><a class="text-link" href="#loader">See what’s new</a></div>
+    <p class="session-eyebrow hero-announcement">Introducing Gold Session Control</p>
+    <h1 id="hero-title"><span class="hero-line">Crash out.</span> <em class="hero-line">Keep your loot.</em></h1>
+    <p class="hero-description">You worked for that loot. Keep it when you choose to leave. Gold Session Control lets you crash out of your DMZ session with the gold button or your own keyboard shortcut.</p>
+    <div class="hero-actions"><a class="button gold" href="#access">Get access <span class="button-price">from €5</span></a><a class="text-link" href="#session-control">Explore Session Control</a></div>
     <div class="hero-footnote"><span class="fine-rule"></span><span>Keys and builds delivered manually on Discord.</span></div>
   </div></div>
-  <div class="hero-bottom wrap"><a href="#experience" class="scroll-cue"><span></span>EXPLORE THE INTERFACE</a></div>
+  <div class="hero-bottom wrap"><a href="#session-control" class="scroll-cue"><span></span>YOUR SESSION. YOUR EXIT.</a></div>
 </section>
-<div class="feature-rail"><div class="wrap rail-content"><span>60–200% CAMERA SCALE</span><span class="rail-divider"></span><span>ESP UP TO 2,500 M</span><span class="rail-divider"></span><span>SIX RETICLE STYLES</span><span class="rail-divider"></span><span>ONE-PRESS PRESETS</span></div></div>
+<div class="feature-rail"><div class="wrap rail-content"><span class="rail-highlight">GOLD SESSION CONTROL</span><span class="rail-divider"></span><span>60–200% CAMERA SCALE</span><span class="rail-divider"></span><span>ESP UP TO 2,500 M</span><span class="rail-divider"></span><span>ONE-PRESS PRESETS</span></div></div>
+
+<section class="session-showcase section" id="session-control" aria-labelledby="session-title"><div class="wrap">
+  <div class="session-heading">
+    <div><p class="session-eyebrow">Gold Session Control · New in AQx</p><h2 id="session-title">That loot is<br><em>worth keeping.</em></h2></div>
+    <div class="session-intro"><p>A backpack worth saving. A run you want to keep. Take control of your exit with a manual action built right into Gameplay.</p><a class="text-link" href="#access">Get Gold Session Control</a></div>
+  </div>
+  <figure class="session-figure">
+    <div class="session-frame-bar"><span>AQx / Gameplay</span><span>Gold Session Control</span></div>
+    <button type="button" class="image-button session-screen" data-image="assets/session-control/gameplay.webp" data-caption="Gold Session Control — Gameplay preview with the preset sidebar visible" aria-label="Enlarge Gameplay preview with Gold Session Control and the preset sidebar"><img src="assets/session-control/gameplay.webp" width="1244" height="844" alt="AQx Gameplay menu with the gold crash button, an Unbound shortcut control and the Saved presets sidebar visible on the right" loading="lazy"></button>
+    <figcaption><span>Gold Session Control · Gameplay preview</span><span>Click to enlarge</span></figcaption>
+  </figure>
+  <div class="session-benefits">
+    <article><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m16 3 11 5v8c0 6-6 10-11 13C11 26 5 22 5 16V8zM11 16l3 3 7-7"/></svg><h3>Preserve your loot.</h3><p>Leave the session while retaining your loot. Loot preservation has been confirmed in player testing.</p></article>
+    <article><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M18 5H6v22h12M12 16h16m-6-6 6 6-6 6"/></svg><h3>Choose when to leave.</h3><p>Open Gameplay, find Session Control and use the gold <strong>crash</strong> button. You decide when to act.</p></article>
+    <article><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="7" width="26" height="18" rx="3"/><path d="M8 12h2m5 0h2m5 0h2M8 17h2m5 0h2m5 0h2M11 21h10"/></svg><h3>Make it your key.</h3><p>Assign a keyboard shortcut and use it with the menu closed. Your choice saves between sessions.</p></article>
+  </div>
+  <div class="session-bottom"><p>Your shortcut starts <strong>Unbound</strong>. Set it when you’re ready.</p><a class="text-link" href="#session-faq">How it works</a></div>
+</div></section>
 
 <section class="experience section wrap" id="experience">
   <div class="section-heading"><h2>Explore the <em>interface.</em></h2><p>Every menu tab, from Aim and ESP to the preset library. Open any screenshot for a closer look.</p></div>
@@ -60,7 +80,7 @@
   <div id="gallery-panel" class="gallery-panel" role="tabpanel" aria-labelledby="tab-aim" tabindex="0">
     <figure class="gallery-image">
       <button type="button" class="image-button" id="gallery-zoom" data-image="assets/release-5-1-2/aim.webp" data-caption="Aim menu preview" aria-label="Enlarge the selected menu preview"><img id="gallery-screen" src="assets/release-5-1-2/aim.webp" alt="Aim tab with targeting, smoothing, shot controls and the preset sidebar" width="1244" height="844" loading="lazy"></button>
-      <figcaption class="image-tag">Rendered preview from the v5.1.2 menu baseline</figcaption>
+      <figcaption class="image-tag" id="gallery-provenance">Rendered preview from the v5.1.2 menu baseline</figcaption>
     </figure>
     <div class="gallery-copy">
       <h3 id="gallery-title">Aim and target selection</h3>
@@ -73,7 +93,7 @@
 <section class="loader-showcase section" id="loader"><div class="wrap">
   <div class="loader-heading">
     <div>
-      <p class="release-date">Build <time datetime="2026-11-24">24 November 2026</time></p>
+      <p class="release-date">Latest update <time datetime="2026-11-25">25 November 2026</time></p>
       <h2>What’s new in <em>v5.1.2.</em></h2>
     </div>
   </div>
@@ -85,6 +105,7 @@
     <div class="release-highlights">
       <h3>Release highlights</h3>
       <ul class="check-list">
+        <li>Gold Session Control with a manual crash button and saved keyboard shortcut</li>
         <li>Camera and spin updates for lobby transitions</li>
         <li>Preset library with shortcut and recovery controls</li>
         <li>Loader shows progress until the menu reports it’s ready</li>
@@ -94,8 +115,14 @@
   </div>
   <div class="release-notes" id="release-notes">
     <h3>Release notes</h3>
-    <p class="release-notes-intro">All 18 update groups from the v5.1.2 loader.</p>
+    <p class="release-notes-intro">The Gold Session Control update, followed by the 18 update groups from the v5.1.2 loader.</p>
     <div class="release-topics">
+      <details open><summary>New: Gold Session Control</summary>
+        <dl>
+          <div><dt>Your session. Your exit.</dt><dd>A gold crash button in Gameplay gives you a manual session-exit action. Loot preservation has been confirmed in player testing.</dd></div>
+          <div><dt>A shortcut of your own</dt><dd>Assign a single keyboard key to use with the menu closed. The shortcut starts Unbound, saves between sessions and can be cleared in the menu.</dd></div>
+        </dl>
+      </details>
       <details><summary>Gameplay and camera</summary>
         <dl>
           <div><dt>Camera and lobby transitions</dt><dd>The camera scale runs from 60% to 200%. The override applies during gameplay, and camera settings save separately from presets.</dd></div>
@@ -159,7 +186,7 @@
   </div>
 </div></section>
 
-<section class="faq section wrap" id="faq"><div><h2>Before<br><em>you start.</em></h2></div><div class="faq-list"><details><summary>How do I get my key and build?<span aria-hidden="true">+</span></summary><p>Join the Discord and ask the team about your chosen duration. Your key and build are delivered manually through Discord. This page does not process payments or issue licenses.</p></details><details><summary>When does my access period begin?<span aria-hidden="true">+</span></summary><p>Timed keys start counting on first activation and last 24 hours, 3 days, 7 days or 30 days. Lifetime keys have no expiry. Ask the team which build and activation requirements apply before purchasing.</p></details><details><summary>Can I switch presets with the menu closed?<span aria-hidden="true">+</span></summary><p>Yes. Preset hotkeys work with the menu open or closed. Activation pauses during text entry, widget interactions and key capture. Release held keys after these interactions before switching again.</p></details><details><summary>What can I use for a custom bind?<span aria-hidden="true">+</span></summary><p>A single keyboard key or one of the five physical mouse buttons. Preset bindings are saved between sessions. Multi-key chords and mouse wheel movements are not supported by the preset binding system. Existing feature shortcuts retain their actions.</p></details><details><summary>Where do these screenshots come from?<span aria-hidden="true">+</span></summary><p>The loader preview comes from the v5.1.2 UI fixture. The six menu views are rendered previews from the gameplay lifecycle build that v5.1.2 is based on.</p></details></div></section>
+<section class="faq section wrap" id="faq"><div><h2>Before<br><em>you start.</em></h2></div><div class="faq-list"><details id="session-faq"><summary>How do I use Gold Session Control?<span aria-hidden="true">+</span></summary><p>In a match, open Gameplay and find Session Control. Click the gold crash button to trigger the manual session-exit action. Loot preservation has been confirmed in player testing; ask the Discord team for the current supported build and its requirements.</p></details><details><summary>Can I give Session Control its own shortcut?<span aria-hidden="true">+</span></summary><p>Yes. It starts Unbound. Click the shortcut control, release held keys and press your chosen keyboard key. Your assignment saves between sessions and works with the menu closed. Escape cancels assignment; Backspace or Clear removes it. Keys already used by features or presets cannot be assigned.</p></details><details><summary>Does Session Control protect my loot automatically?<span aria-hidden="true">+</span></summary><p>You choose when to activate it. Loot retention depends on the game and session behaviour. It does not automatically activate when you are downed or recover loot already lost.</p></details><details><summary>How do I get my key and build?<span aria-hidden="true">+</span></summary><p>Join the Discord and ask the team about your chosen duration. Your key and build are delivered manually through Discord. This page does not process payments or issue licenses.</p></details><details><summary>When does my access period begin?<span aria-hidden="true">+</span></summary><p>Timed keys start counting on first activation and last 24 hours, 3 days, 7 days or 30 days. Lifetime keys have no expiry. Ask the team which build and activation requirements apply before purchasing.</p></details><details><summary>Can I switch presets with the menu closed?<span aria-hidden="true">+</span></summary><p>Yes. Preset hotkeys work with the menu open or closed. Activation pauses during text entry, widget interactions and key capture. Release held keys after these interactions before switching again.</p></details><details><summary>What can I use for a custom bind?<span aria-hidden="true">+</span></summary><p>A single keyboard key or one of the five physical mouse buttons. Preset bindings are saved between sessions. Multi-key chords and mouse wheel movements are not supported by the preset binding system. Existing feature shortcuts retain their actions.</p></details><details><summary>Where do these screenshots come from?<span aria-hidden="true">+</span></summary><p>The Session Control showcase and Gameplay gallery use the Gold Session Control menu preview with the preset sidebar visible. The other five tabs come from the v5.1.2 gameplay lifecycle baseline. The loader image comes from the v5.1.2 UI fixture. These are rendered interface previews.</p></details></div></section>
 <section class="closing wrap"><div class="closing-brand">AQx</div><a class="button outline" href="https://discord.gg/VzHWpB7uG" target="_blank" rel="noopener noreferrer">Join the Discord</a></section>
 </main>
 <footer class="wrap footer"><span>© <span id="year">2026</span> AQx. Precision, on your terms.</span><div><a href="#experience">Interface</a><a href="#faq">Questions</a><a href="#">Back to top</a></div><p>Independent project. Not affiliated with or endorsed by the game’s publishers.</p></footer>

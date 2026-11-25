@@ -2,6 +2,7 @@
   const hero = document.querySelector('.hero');
   const loader = document.querySelector('.loader-stage');
   const terrain = document.querySelector('.philosophy');
+  const session = document.querySelector('.session-showcase');
   const header = document.querySelector('.header');
   const progressBar = document.querySelector('.reading-progress');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -108,7 +109,7 @@
   function updateMotionPreference() {
     observer.disconnect();
     activeScenes.clear();
-    for (const scene of [hero, loader, terrain]) {
+    for (const scene of [hero, loader, terrain, session].filter(Boolean)) {
       scene.classList.remove('media-in-view');
       if (!reducedMotion.matches) observer.observe(scene);
     }

@@ -19,6 +19,13 @@ assert.deepEqual([...loaderSection.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g)].map(
 const menuTabs=[...html.matchAll(/data-tab="([a-z]+)"/g)].map(match=>match[1]);
 assert.deepEqual(menuTabs,['aim','esp','hud','gameplay','lobby','presets'],'Missing or out-of-order menu tabs');
 for(const tab of menuTabs)await access(path.join(dist,'assets','release-5-1-2',tab+'.webp'));
+const app=await readFile(path.join(dist,'app.js'),'utf8');
+for(const match of app.matchAll(/['"](assets\/[^'"`]+\.(?:webp|png|jpg))['"]/g))await access(path.join(dist,match[1]));
+const socialImage=html.match(/<meta property="og:image" content="([^"]+)"/)?.[1];
+assert(socialImage,'Missing social preview image');
+const socialUrl=new URL(socialImage);
+assert.equal(socialUrl.origin,new URL(html.match(/<meta property="og:url" content="([^"]+)"/)[1]).origin,'Social image must be self-hosted');
+await access(path.join(dist,socialUrl.pathname));
 async function scan(dir){for(const entry of await readdir(dir,{withFileTypes:true})){const file=path.join(dir,entry.name);if(entry.isDirectory())await scan(file);else{assert(!/\.(exe|dll|env|csv)$/i.test(entry.name),'Private or executable file in public assets');if(/\.(html|js|css)$/i.test(entry.name)){const s=await readFile(file,'utf8');assert(!/ALQ1-[A-F0-9]{4}-/.test(s),'License key in public source');}}}}
 await scan(dist);
 const admin=await readFile(path.join(dist,'admin','index.html'),'utf8');

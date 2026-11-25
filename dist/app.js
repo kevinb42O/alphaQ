@@ -18,10 +18,12 @@ const gallery = {
     features: ['Precision, Heart, Quackshot, Alpha-Q logo, Devil face and Pentagram', 'Transparent Devil face artwork with a fixed centre dot', 'Size, thickness and outline controls plus adjustable RGB cycling']
   },
   gameplay: {
-    title: 'Camera and gameplay',
-    alt: 'Gameplay tab with camera, spin and weapon settings',
-    description: 'Adjust your view and set up the controls you use during a session.',
-    features: ['Camera scale from 60% to 200%', 'Camera settings saved separately from presets', 'Remappable spin pause with OFF, PAUSED, WAITING, AIM and ON states']
+    title: 'Your session. Your exit.',
+    image: 'assets/session-control/gameplay.webp',
+    provenance: 'Gold Session Control update · rendered Gameplay preview with preset sidebar',
+    alt: 'Gameplay tab with the gold crash button, Unbound shortcut and the Saved presets sidebar visible',
+    description: 'Gold Session Control puts your manual exit alongside your camera and gameplay controls.',
+    features: ['Gold crash button in the Session Control card', 'Optional saved keyboard shortcut, initially Unbound', 'Use your assigned shortcut with the menu closed', 'Camera scale from 60% to 200% and remappable spin pause']
   },
   lobby: {
     title: 'Lobby overview',
@@ -52,7 +54,7 @@ gallery.aim = {
 function setTab(tab) {
   const key = tab.dataset.tab;
   const data = gallery[key];
-  const image = `assets/release-5-1-2/${key}.webp`;
+  const image = data.image ?? `assets/release-5-1-2/${key}.webp`;
   for (const button of galleryTabs) {
     const active = button === tab;
     button.setAttribute('aria-selected', String(active));
@@ -63,6 +65,7 @@ function setTab(tab) {
   galleryScreen.alt = data.alt;
   galleryTitle.textContent = data.title;
   galleryDescription.textContent = data.description;
+  $('#gallery-provenance').textContent = data.provenance ?? 'Rendered preview from the v5.1.2 menu baseline';
   galleryFeatures.replaceChildren(...data.features.map(feature => {
     const item = document.createElement('li');
     item.textContent = feature;
