@@ -23,7 +23,7 @@ const gallery = {
     provenance: 'Gold Session Control update · rendered Gameplay preview with preset sidebar',
     alt: 'Gameplay tab with the gold crash button, Unbound shortcut and the Saved presets sidebar visible',
     description: 'Gold Session Control puts your manual exit alongside your camera and gameplay controls.',
-    features: ['Gold crash button in the Session Control card', 'Optional saved keyboard shortcut, initially Unbound', 'Use your assigned shortcut with the menu closed', 'Camera scale from 60% to 200% and remappable spin pause']
+    features: ['Gold crash button and optional saved keyboard shortcut', 'Streamer Mode: smoothed silent aim and player direction arrows', 'Crop the outer arrow band from your broadcast in your streaming software', 'Camera scale from 60% to 200% and remappable spin pause']
   },
   lobby: {
     title: 'Lobby overview',

@@ -4,11 +4,11 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0c0d0c">
   <title>AQx — Crash out. Keep your loot.</title>
-  <meta name="description" content="Your session. Your exit. Discover Gold Session Control for AQx: a manual crash button to preserve your DMZ loot, with an optional custom keyboard shortcut.">
+  <meta name="description" content="Keep your DMZ loot with Gold Session Control. Discover AQx Streamer Mode with smoothed silent aim, edge-arrow awareness and a broadcast crop you control.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aqxmenu.vercel.app/">
   <meta property="og:title" content="AQx — Crash out. Keep your loot.">
-  <meta property="og:description" content="That loot is worth keeping. Meet Gold Session Control: choose your exit with the gold crash button or your own keyboard shortcut.">
+  <meta property="og:description" content="Keep your loot with Gold Session Control. Explore Streamer Mode with smoothed silent aim and directional awareness at the edges of your display.">
   <meta property="og:image" content="https://aqxmenu.vercel.app/assets/session-control/social-card.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
@@ -19,13 +19,14 @@
   <script src="app.js" defer></script>
   <script src="motion.js" defer></script>
   <link rel="stylesheet" href="session-control.css">
+  <link rel="stylesheet" href="streamer-mode.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="reading-progress" aria-hidden="true"></div><header class="header"><div class="nav-wrap">
   <a class="brand" href="#" aria-label="AQx home"><svg viewBox="0 0 40 36" aria-hidden="true"><path d="M20 1 1 34h10L25 10zM26 15l-5 8 7 11h11zM18 27l-4 7h13l-4-7z" fill="currentColor"/></svg><span>AQx</span></a>
   <button class="menu-toggle" aria-controls="navigation" aria-expanded="false" aria-label="Open navigation"><span></span><span></span></button>
-  <nav id="navigation" aria-label="Main navigation"><a href="#session-control">Session Control</a><a href="#experience">Interface</a><a href="#loader">What’s new</a><a href="#access">Get access</a><a class="nav-discord" href="https://discord.gg/VzHWpB7uG" target="_blank" rel="noopener noreferrer">Join Discord <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5a17 17 0 0 0-4-1l-.5 1a16 16 0 0 0-5 0L9 4a17 17 0 0 0-4 1C2.5 9 2 13 2.5 17c2 1.5 4 2 5 2l1-2-1.5-.7.5-.3a14 14 0 0 0 9 0l.5.3L15.5 17l1 2c1 0 3-.5 5-2 .5-4 0-8-2.5-12ZM8.5 14c-1 0-1.5-1-1.5-2s.5-2 1.5-2 1.5 1 1.5 2-.5 2-1.5 2Zm7 0c-1 0-1.5-1-1.5-2s.5-2 1.5-2 1.5 1 1.5 2-.5 2-1.5 2Z" fill="currentColor"/></svg></a></nav>
+  <nav id="navigation" aria-label="Main navigation"><a href="#session-control">Session Control</a><a href="#streamer-mode">Streamer Mode</a><a href="#experience">Interface</a><a href="#loader">What’s new</a><a href="#access">Get access</a><a class="nav-discord" href="https://discord.gg/VzHWpB7uG" target="_blank" rel="noopener noreferrer">Join Discord <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5a17 17 0 0 0-4-1l-.5 1a16 16 0 0 0-5 0L9 4a17 17 0 0 0-4 1C2.5 9 2 13 2.5 17c2 1.5 4 2 5 2l1-2-1.5-.7.5-.3a14 14 0 0 0 9 0l.5.3L15.5 17l1 2c1 0 3-.5 5-2 .5-4 0-8-2.5-12ZM8.5 14c-1 0-1.5-1-1.5-2s.5-2 1.5-2 1.5 1 1.5 2-.5 2-1.5 2Zm7 0c-1 0-1.5-1-1.5-2s.5-2 1.5-2 1.5 1 1.5 2-.5 2-1.5 2Z" fill="currentColor"/></svg></a></nav>
 </div></header>
 <main id="main">
 <section class="hero hero-premium" aria-labelledby="hero-title">
@@ -47,7 +48,7 @@
   </div></div>
   <div class="hero-bottom wrap"><a href="#session-control" class="scroll-cue"><span></span>YOUR SESSION. YOUR EXIT.</a></div>
 </section>
-<div class="feature-rail"><div class="wrap rail-content"><span class="rail-highlight">GOLD SESSION CONTROL</span><span class="rail-divider"></span><span>60–200% CAMERA SCALE</span><span class="rail-divider"></span><span>ESP UP TO 2,500 M</span><span class="rail-divider"></span><span>ONE-PRESS PRESETS</span></div></div>
+<div class="feature-rail"><div class="wrap rail-content"><span class="rail-highlight">GOLD SESSION CONTROL</span><span class="rail-divider"></span><a href="#streamer-mode" class="rail-highlight">STREAMER MODE</a><span class="rail-divider"></span><span>ESP UP TO 2,500 M</span><span class="rail-divider"></span><span>ONE-PRESS PRESETS</span></div></div>
 
 <section class="session-showcase section" id="session-control" aria-labelledby="session-title"><div class="wrap">
   <div class="session-heading">
@@ -65,6 +66,47 @@
     <article><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="7" width="26" height="18" rx="3"/><path d="M8 12h2m5 0h2m5 0h2M8 17h2m5 0h2m5 0h2M11 21h10"/></svg><h3>Make it your key.</h3><p>Assign a keyboard shortcut and use it with the menu closed. Your choice saves between sessions.</p></article>
   </div>
   <div class="session-bottom"><p>Your shortcut starts <strong>Unbound</strong>. Set it when you’re ready.</p><a class="text-link" href="#session-faq">How it works</a></div>
+</div></section>
+
+<section class="streamer-showcase section" id="streamer-mode" aria-labelledby="streamer-title"><div class="wrap streamer-layout">
+  <div class="streamer-copy">
+    <p class="session-eyebrow">AQx Streamer Mode</p>
+    <h2 id="streamer-title">Your stream.<br><em>Your view.</em></h2>
+    <p class="streamer-lead">Keep your awareness close. Keep your broadcast focused on the game. Streamer Mode pairs smoothed silent aim with player direction arrows at the edges of your display.</p>
+    <dl class="streamer-features">
+      <div><dt>Smoothed silent aim.</dt><dd>Visible targets. Chest-only targeting. Your aim activation key still applies, and you stay in control of firing.</dd></div>
+      <div><dt>Awareness at the edges.</dt><dd>Player arrows show direction, including behind you. Nearby threats pulse in amber; distance fading keeps farther arrows subtle.</dd></div>
+      <div><dt>Switch back to your setup.</dt><dd>Toggle in Gameplay or use your shortcut—Page Down by default. Turning it off restores your underlying preferences.</dd></div>
+    </dl>
+    <div class="streamer-actions"><a class="button gold" href="#access">Get access</a><a class="text-link" href="#streamer-faq">Set up your capture</a></div>
+  </div>
+  <figure class="streamer-capture" aria-labelledby="capture-caption">
+    <div class="capture-heading"><span>Your display</span><span>Edge awareness</span></div>
+    <div class="capture-display">
+      <svg viewBox="0 0 560 300" role="img" aria-label="Illustration: player direction arrows remain at the outer edges of your display, outside the dashed broadcast crop">
+        <path class="capture-terrain-back" d="M0 204 85 148 151 187 236 96 304 157 371 123 462 183 560 130V300H0Z"/>
+        <path class="capture-terrain-front" d="M0 247 105 210 194 246 299 184 408 224 488 197 560 217V300H0Z"/>
+        <path class="capture-horizon" d="M0 265H560M0 280H560M92 300l91-49m285 49-91-49"/>
+        <rect class="capture-crop" x="48" y="28" width="464" height="244" rx="2"/>
+        <path class="capture-arrow" d="m280 7-9 16h18Z"/>
+        <path class="capture-arrow capture-near" d="m552 121-16-9v18Z"/>
+        <path class="capture-arrow" d="m8 191 16-9v18Z"/>
+        <path class="capture-arrow" d="m410 293-9-16h18Z"/>
+      </svg>
+      <span class="capture-crop-label">Your broadcast crop</span>
+    </div>
+    <div class="capture-connector"><span>Crop the outer arrow band in your streaming software</span></div>
+    <div class="capture-heading"><span>Your broadcast</span><span>Cropped game view</span></div>
+    <div class="capture-output">
+      <svg viewBox="48 28 464 244" role="img" aria-label="Illustration: the cropped broadcast contains the central game view, leaving the edge arrows outside the capture">
+        <path class="capture-terrain-back" d="M0 204 85 148 151 187 236 96 304 157 371 123 462 183 560 130V300H0Z"/>
+        <path class="capture-terrain-front" d="M0 247 105 210 194 246 299 184 408 224 488 197 560 217V300H0Z"/>
+        <path class="capture-horizon" d="M0 265H560M0 280H560M92 300l91-49m285 49-91-49"/>
+      </svg>
+    </div>
+    <figcaption id="capture-caption">Capture setup illustration. You configure the crop; preview your broadcast before going live.</figcaption>
+  </figure>
+  <div class="streamer-capture-note"><strong>You see the arrows. Your crop keeps them off stream.</strong><p>Streamer Mode replaces standard ESP boxes, skeletons, radar, tracers and chams with edge arrows. Hide that outer band in your capture to keep the arrows out of the broadcast. Capture cropping is manual.</p></div>
 </div></section>
 
 <section class="experience section wrap" id="experience">
@@ -106,6 +148,7 @@
       <h3>Release highlights</h3>
       <ul class="check-list">
         <li>Gold Session Control with a manual crash button and saved keyboard shortcut</li>
+        <li>Streamer Mode with smoothed silent aim, edge arrows and close-player alerts</li>
         <li>Camera and spin updates for lobby transitions</li>
         <li>Preset library with shortcut and recovery controls</li>
         <li>Loader shows progress until the menu reports it’s ready</li>
@@ -115,8 +158,15 @@
   </div>
   <div class="release-notes" id="release-notes">
     <h3>Release notes</h3>
-    <p class="release-notes-intro">The Gold Session Control update, followed by the 18 update groups from the v5.1.2 loader.</p>
+    <p class="release-notes-intro">Gold Session Control, Streamer Mode and the 18 update groups from the v5.1.2 loader.</p>
     <div class="release-topics">
+      <details><summary>Streamer Mode and capture setup</summary>
+        <dl>
+          <div><dt>Silent aim and manual fire</dt><dd>Smoothed, chest-only silent aim for visible targets. Your aim activation binding still applies. Automatic fire, rapid fire, autowall, spin and camera override are off while the mode is active.</dd></div>
+          <div><dt>Edge awareness</dt><dd>Directional player arrows replace normal ESP and other location overlays. Configure close-player alerts and distance fading in Arrow settings. Crop the outer arrow band in your own capture software; the mode does not configure or hide overlays from capture automatically.</dd></div>
+          <div><dt>Temporary settings</dt><dd>The mode starts off after a restart. Toggle it in Gameplay or with the configurable shortcut, Page Down by default. Turning it off restores underlying settings without writing the mode’s overrides into your presets.</dd></div>
+        </dl>
+      </details>
       <details open><summary>New: Gold Session Control</summary>
         <dl>
           <div><dt>Your session. Your exit.</dt><dd>A gold crash button in Gameplay gives you a manual session-exit action. Loot preservation has been confirmed in player testing.</dd></div>
@@ -186,7 +236,7 @@
   </div>
 </div></section>
 
-<section class="faq section wrap" id="faq"><div><h2>Before<br><em>you start.</em></h2></div><div class="faq-list"><details id="session-faq"><summary>How do I use Gold Session Control?<span aria-hidden="true">+</span></summary><p>In a match, open Gameplay and find Session Control. Click the gold crash button to trigger the manual session-exit action. Loot preservation has been confirmed in player testing; ask the Discord team for the current supported build and its requirements.</p></details><details><summary>Can I give Session Control its own shortcut?<span aria-hidden="true">+</span></summary><p>Yes. It starts Unbound. Click the shortcut control, release held keys and press your chosen keyboard key. Your assignment saves between sessions and works with the menu closed. Escape cancels assignment; Backspace or Clear removes it. Keys already used by features or presets cannot be assigned.</p></details><details><summary>Does Session Control protect my loot automatically?<span aria-hidden="true">+</span></summary><p>You choose when to activate it. Loot retention depends on the game and session behaviour. It does not automatically activate when you are downed or recover loot already lost.</p></details><details><summary>How do I get my key and build?<span aria-hidden="true">+</span></summary><p>Join the Discord and ask the team about your chosen duration. Your key and build are delivered manually through Discord. This page does not process payments or issue licenses.</p></details><details><summary>When does my access period begin?<span aria-hidden="true">+</span></summary><p>Timed keys start counting on first activation and last 24 hours, 3 days, 7 days or 30 days. Lifetime keys have no expiry. Ask the team which build and activation requirements apply before purchasing.</p></details><details><summary>Can I switch presets with the menu closed?<span aria-hidden="true">+</span></summary><p>Yes. Preset hotkeys work with the menu open or closed. Activation pauses during text entry, widget interactions and key capture. Release held keys after these interactions before switching again.</p></details><details><summary>What can I use for a custom bind?<span aria-hidden="true">+</span></summary><p>A single keyboard key or one of the five physical mouse buttons. Preset bindings are saved between sessions. Multi-key chords and mouse wheel movements are not supported by the preset binding system. Existing feature shortcuts retain their actions.</p></details><details><summary>Where do these screenshots come from?<span aria-hidden="true">+</span></summary><p>The Session Control showcase and Gameplay gallery use the Gold Session Control menu preview with the preset sidebar visible. The other five tabs come from the v5.1.2 gameplay lifecycle baseline. The loader image comes from the v5.1.2 UI fixture. These are rendered interface previews.</p></details></div></section>
+<section class="faq section wrap" id="faq"><div><h2>Before<br><em>you start.</em></h2></div><div class="faq-list"><details id="session-faq"><summary>How do I use Gold Session Control?<span aria-hidden="true">+</span></summary><p>In a match, open Gameplay and find Session Control. Click the gold crash button to trigger the manual session-exit action. Loot preservation has been confirmed in player testing; ask the Discord team for the current supported build and its requirements.</p></details><details><summary>Can I give Session Control its own shortcut?<span aria-hidden="true">+</span></summary><p>Yes. It starts Unbound. Click the shortcut control, release held keys and press your chosen keyboard key. Your assignment saves between sessions and works with the menu closed. Escape cancels assignment; Backspace or Clear removes it. Keys already used by features or presets cannot be assigned.</p></details><details><summary>Does Session Control protect my loot automatically?<span aria-hidden="true">+</span></summary><p>You choose when to activate it. Loot retention depends on the game and session behaviour. It does not automatically activate when you are downed or recover loot already lost.</p></details><details id="streamer-faq"><summary>How do I keep Streamer Mode arrows out of my broadcast?<span aria-hidden="true">+</span></summary><p>Enable Streamer Mode in Gameplay, then crop the outer arrow band from your capture in your streaming software. The band is approximately 1 cm on your display; its actual size varies with resolution and scaling. Preview the result before going live and keep the menu out of your capture. You configure the crop yourself.</p></details><details><summary>Does Streamer Mode hide full ESP automatically?<span aria-hidden="true">+</span></summary><p>Streamer Mode replaces regular ESP boxes, skeletons, radar, tracers and chams with player direction arrows around the screen edges. It does not exclude overlays from recording software. The arrows remain visible on your display and stay out of the broadcast when the capture crop excludes the entire arrow band.</p></details><details><summary>What aim settings does Streamer Mode use?<span aria-hidden="true">+</span></summary><p>Smoothed silent aim for visible targets, with chest-only targeting and your configured aim activation key. You fire manually. Automatic fire, rapid fire, autowall, spin, camera override, the overlay crosshair and FOV circle are off while Streamer Mode is active. Switch it off to restore your underlying preferences.</p></details><details><summary>How do I get my key and build?<span aria-hidden="true">+</span></summary><p>Join the Discord and ask the team about your chosen duration. Your key and build are delivered manually through Discord. This page does not process payments or issue licenses.</p></details><details><summary>When does my access period begin?<span aria-hidden="true">+</span></summary><p>Timed keys start counting on first activation and last 24 hours, 3 days, 7 days or 30 days. Lifetime keys have no expiry. Ask the team which build and activation requirements apply before purchasing.</p></details><details><summary>Can I switch presets with the menu closed?<span aria-hidden="true">+</span></summary><p>Yes. Preset hotkeys work with the menu open or closed. Activation pauses during text entry, widget interactions and key capture. Release held keys after these interactions before switching again.</p></details><details><summary>What can I use for a custom bind?<span aria-hidden="true">+</span></summary><p>A single keyboard key or one of the five physical mouse buttons. Preset bindings are saved between sessions. Multi-key chords and mouse wheel movements are not supported by the preset binding system. Existing feature shortcuts retain their actions.</p></details><details><summary>Where do these screenshots come from?<span aria-hidden="true">+</span></summary><p>The Session Control showcase and Gameplay gallery use the Gold Session Control menu preview with the preset sidebar visible. The other five tabs come from the v5.1.2 gameplay lifecycle baseline. The loader image comes from the v5.1.2 UI fixture. These are rendered interface previews.</p></details></div></section>
 <section class="closing wrap"><div class="closing-brand">AQx</div><a class="button outline" href="https://discord.gg/VzHWpB7uG" target="_blank" rel="noopener noreferrer">Join the Discord</a></section>
 </main>
 <footer class="wrap footer"><span>© <span id="year">2026</span> AQx. Precision, on your terms.</span><div><a href="#experience">Interface</a><a href="#faq">Questions</a><a href="#">Back to top</a></div><p>Independent project. Not affiliated with or endorsed by the game’s publishers.</p></footer>

@@ -47,3 +47,11 @@ The hero, dedicated Session Control showcase, Gameplay gallery, release update, 
 `dist/assets/session-control/gameplay.webp` is a lossless conversion of `build/aqx-transition-crash-self-20261125-r4/preview/gameplay/premium-tab.png`, with the complete preset sidebar visible. Only this new Gameplay image is used; no compact or sidebar-hidden variant is published. `social-card.jpg` places the same complete screenshot beside typeset launch copy. Other gallery tabs and the loader retain their documented baseline provenance. `dist/app.js` selects the image and provenance per tab.
 
 Loot retention was reported by the owner on the underlying native r5 action. The merged Gold Session Control build has offline control and preview checks; live acceptance is separate. The site describes the manual action and player-tested outcome without promising protection against every death or disconnect.
+
+## Streamer Mode showcase
+
+`#streamer-mode` introduces smoothed silent aim, visible-target chest-only aim, manual firing, player edge arrows, close-player alerts, configurable distance fading and temporary settings. Navigation, the feature rail, Gameplay gallery copy, release notes, search/social descriptions and three FAQ answers expose the feature. The hero retains Gold Session Control.
+
+The two SVG landscapes are labelled capture-setup illustrations, not gameplay screenshots. They show the same central scene before/after a manual crop. The only new product screenshot remains the previously selected full preset-sidebar Gameplay image.
+
+Claims follow `docs/streamer-mode.md`, `docs/streamer-ui-state.md` and the inherited `streamer-checks.json` (175 passed checks in the Gold Session Control candidate). Standard ESP and other location overlays are replaced by arrows; users crop their capture themselves. There is no automatic capture exclusion, software integration, crop configuration or guarantee of an invisible overlay in every recording setup.
